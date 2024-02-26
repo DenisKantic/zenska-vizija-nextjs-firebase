@@ -9,4 +9,6 @@
 
 Sve slike ce se pohranjivati unutar /public/images foldera. Slobodno kreirajte sub foldere unutar "images" foldera, zbog lakse organizovanosti. 
 
+### PRAVILA ZA IMENA BRANCH 
 
+Prvo navedete ime onoga sto radite pa onda crtica pa svoje ime. Primjer </br> <b>Dashboard-Denis</b>
