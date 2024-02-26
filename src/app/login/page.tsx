@@ -1,14 +1,28 @@
 "use client"
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Image from 'next/image'
+import { signIn, useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation';
+
 
 const Login = () => {
 
+  const session = useSession();
+
+  const checkUser = () => {   // check if user is logged in. 
+    if(session?.data?.user){
+    redirect('/dashboard'); // if it's already logged in, redirect to dashboard.
+  } else {
+    return null;
+  }
+}
+
+useEffect(()=>{
+  checkUser();
+}) // fire the function
+
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
-
-  {console.log("email", email)};
-  {console.log("password", password)}
 
   return (
     <div 
@@ -27,9 +41,10 @@ const Login = () => {
         />
     </div>
 
-    <form
+    <div
     className='mx-auto h-[50vh] flex flex-col overflow-hidden
-    sm:w-[90%] lg:w-[50%] sm:p-0 md:p-10'>
+    sm:w-[90%] lg:w-[50%] sm:p-0 md:p-10'
+    onSubmit={()=>signIn('credentials', {email,password, redirect:true, callbackUrl: '/dashboard'})}>
         <h1 
         className='text-4xl text-[#AC009B] font-bold p-3'>
         Dobrodošli!
@@ -69,15 +84,17 @@ const Login = () => {
             >
             Napusti
             </button>
+
             <button
             className='w-[45%] bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-3 text-lg
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]'
+                       onClick={() => signIn('credentials', {email, password, redirect: true, callbackUrl: '/dashboard'})}
             >
             Prijavi se
             </button>
         </div>
 
-    </form>
+    </div>
 
     <div className='flex p-10 w-[50%] h-[50vh] sm:hidden lg:block'>
         <Image 
@@ -93,4 +110,5 @@ const Login = () => {
   )
 }
 
+Login.requireAuth = true
 export default Login
