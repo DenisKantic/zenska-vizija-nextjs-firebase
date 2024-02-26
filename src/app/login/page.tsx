@@ -3,6 +3,13 @@ import React, {useState} from 'react'
 import Image from 'next/image'
 
 const Login = () => {
+
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+
+  {console.log("email", email)};
+  {console.log("password", password)}
+
   return (
     <div 
     className='w-full p-10 bg-[#FEF1FD] min-h-screen flex justify-center items-center overflow-hidden
@@ -34,6 +41,7 @@ const Login = () => {
         placeholder='Unesite Vaš mail' 
         className='w-full mt-10 py-3 p-10 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
+        onChange={(e)=>setEmail(e.target.value)}
         /> 
 
         <br />
@@ -44,6 +52,7 @@ const Login = () => {
         placeholder='Šifra' 
         className='w-full mt-5 py-3 p-10 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
+        onChange={(e)=>setPassword(e.target.value)}
         /> 
 
         <br />
@@ -61,7 +70,7 @@ const Login = () => {
             Napusti
             </button>
             <button
-            className='w-[45%] bg-[#F93EDF] border border-[2px] border-[#F93EDF] rounded-full py-3 text-lg
+            className='w-[45%] bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-3 text-lg
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]'
             >
             Prijavi se
