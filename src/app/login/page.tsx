@@ -49,6 +49,7 @@ useEffect(()=>{
         width={50}
         height={50}
         className='w-full h-full object-contain'
+        unoptimized={true}
         />
     </div>
 
@@ -126,6 +127,7 @@ useEffect(()=>{
         width={50}
         height={50}
         className='w-full h-full object-contain'
+        unoptimized={true}
         />
     </div>
 
