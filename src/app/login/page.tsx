@@ -17,6 +17,17 @@ const Login = () => {
   }
 }
 
+const handleSubmit = (e: any) =>{
+  e.preventDefault();
+  if(email == ""){
+    alert("Unesite vas Email")
+  } else if (password == ""){
+    alert("Unesite vasu sifru")
+  } else {
+  signIn('credentials', {email, password, redirect: true, callbackUrl: '/dashboard'})
+  }
+}
+
 useEffect(()=>{
   checkUser();
 }) // fire the function
@@ -57,6 +68,10 @@ useEffect(()=>{
         className='w-full mt-10 py-3 p-10 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
         onChange={(e)=>setEmail(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter")
+            handleSubmit(e);
+          }}
         /> 
 
         <br />
@@ -68,6 +83,10 @@ useEffect(()=>{
         className='w-full mt-5 py-3 p-10 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
         onChange={(e)=>setPassword(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter")
+            handleSubmit(e);
+          }}
         /> 
 
         <br />
@@ -89,6 +108,10 @@ useEffect(()=>{
             className='w-[45%] bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-3 text-lg
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]'
                        onClick={() => signIn('credentials', {email, password, redirect: true, callbackUrl: '/dashboard'})}
+                       onKeyDown={(e) => {
+                        if (e.key === "Enter")
+                          handleSubmit(e);
+                        }}
             >
             Prijavi se
             </button>
