@@ -1,17 +1,16 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
 const Dashboard = () => {
-
+  
   const session = useSession({
     required: true,
     onUnauthenticated() {
       redirect('/login');
     },
-  });
-
+  })
 
   return (
     <div className='bg-orange-200 flex h-screen justify-center items-center'>
