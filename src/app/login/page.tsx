@@ -66,7 +66,7 @@ useEffect(()=>{
         type="email" 
         required 
         placeholder='Unesite Vaš mail' 
-        className='w-full mt-10 py-3 p-10 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
+        className='w-full mt-10 py-3 p-7 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
         onChange={(e)=>setEmail(e.target.value)}
         onKeyDown={(e) => {
@@ -81,7 +81,7 @@ useEffect(()=>{
         type="password" 
         required 
         placeholder='Šifra' 
-        className='w-full mt-5 py-3 p-10 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
+        className='w-full mt-5 py-3 p-7 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
         onChange={(e)=>setPassword(e.target.value)}
         onKeyDown={(e) => {
@@ -99,14 +99,14 @@ useEffect(()=>{
 
         <div className='w-full mt-5 p-3 flex flex-row justify-between items-center'>
             <button
-            className='w-[45%] bg-none border border-[2px] border-[#F93EDF] rounded-full py-3 text-lg text-[#F93EDF]
+            className='w-[45%] bg-none border border-[2px] border-[#F93EDF] rounded-full py-2 text-lg text-[#F93EDF]
                        hover:bg-[#F93EDF] hover:text-white hover:font-bold'
             >
             Napusti
             </button>
 
             <button
-            className='w-[45%] bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-3 text-lg
+            className='w-[45%] bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-2 text-lg
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]'
                        onClick={() => signIn('credentials', {email, password, redirect: true, callbackUrl: '/dashboard'})}
                        onKeyDown={(e) => {
