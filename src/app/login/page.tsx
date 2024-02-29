@@ -37,12 +37,12 @@ useEffect(()=>{
 
   return (
     <div 
-    className='w-full p-10 bg-[#FEF1FD] min-h-screen flex justify-center items-center overflow-hidden
-    sm:flex-col lg:flex-row'>
+    className='w-full bg-[#FEF1FD] min-h-screen flex justify-center items-center overflow-hidden
+    xxs:flex-col lg:flex-row xxs:p-4 sm:p-10'>
 
     <div 
-    className='flex w-[50%] h-[50vh] 
-               sm:h-[30vh] lg:hidden'>
+    className='flex h-[50vh] 
+               xxs:h-[15vh] lg:hidden xxs:flex-col'>
         <Image 
         src="/images/zenskaBG.png"
         alt='zenska vizija logo'
@@ -55,10 +55,11 @@ useEffect(()=>{
 
     <div
     className='mx-auto h-[50vh] flex flex-col overflow-hidden
-    sm:w-[90%] lg:w-[50%] sm:p-0 md:p-10'
+    xxs:w-full xxs:h-full bg-red-200 lg:w-[50%] sm:p-0 md:p-10'
     onSubmit={()=>signIn('credentials', {email,password, redirect:true, callbackUrl: '/dashboard'})}>
         <h1 
-        className='text-4xl text-[#AC009B] font-bold p-3'>
+        className='text-[#AC009B] font-bold p-3
+                  xxs:text-2xl sm:text-4xl'>
         Dobrodošli!
         </h1>
 
@@ -66,8 +67,9 @@ useEffect(()=>{
         type="email" 
         required 
         placeholder='Unesite Vaš mail' 
-        className='w-full mt-10 py-3 p-7 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
-        hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
+        className='w-full mt-10 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
+        hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
+        xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3'
         onChange={(e)=>setEmail(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter")
@@ -82,7 +84,8 @@ useEffect(()=>{
         required 
         placeholder='Šifra' 
         className='w-full mt-5 py-3 p-7 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
-        hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
+        hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
+        xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3'
         onChange={(e)=>setPassword(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter")
@@ -94,20 +97,23 @@ useEffect(()=>{
 
         <a 
         href="#"
-        className='text-lg text-[#C86DD7] m-3 italic underline'
+        className='text-[#C86DD7] italic underline
+                  xxs:text-sm xxs:m-0 sm:text-lg sm:m-3'
         >Zaboravili ste šifru?</a>
 
         <div className='w-full mt-5 p-3 flex flex-row justify-between items-center'>
             <button
-            className='w-[45%] bg-none border border-[2px] border-[#F93EDF] rounded-full py-2 text-lg text-[#F93EDF]
-                       hover:bg-[#F93EDF] hover:text-white hover:font-bold'
+            className='w-[45%] bg-none border border-[2px] border-[#F93EDF] rounded-full py-2 text-[#F93EDF]
+                       hover:bg-[#F93EDF] hover:text-white hover:font-bold
+                      xxs:text-sm sm:text-lg'
             >
             Napusti
             </button>
 
             <button
-            className='w-[45%] bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-2 text-lg
-                       hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]'
+            className='w-[45%] bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-2 
+                       hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
+                       xxs:text-sm sm:text-lg'
                        onClick={() => signIn('credentials', {email, password, redirect: true, callbackUrl: '/dashboard'})}
                        onKeyDown={(e) => {
                         if (e.key === "Enter")
@@ -120,7 +126,7 @@ useEffect(()=>{
 
     </div>
 
-    <div className='flex p-10 w-[50%] h-[50vh] sm:hidden lg:block'>
+    <div className='flex p-10 w-[50%] h-[50vh] xxs:hidden lg:block'>
         <Image 
         src="/images/zenskaBG.png"
         alt='zenska vizija logo'
