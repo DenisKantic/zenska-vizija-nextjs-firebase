@@ -55,7 +55,7 @@ useEffect(()=>{
 
     <div
     className='mx-auto h-[50vh] flex flex-col overflow-hidden
-    xxs:w-full xxs:h-full bg-red-200 lg:w-[50%] sm:p-0 md:p-10'
+    xxs:w-full xxs:h-full lg:w-[50%] sm:p-0 md:p-10'
     onSubmit={()=>signIn('credentials', {email,password, redirect:true, callbackUrl: '/dashboard'})}>
         <h1 
         className='text-[#AC009B] font-bold p-3
