@@ -10,17 +10,20 @@ const createPost = () => {
   const [title,setTitle] = useState("");
   const [option, setOption] = useState("blog");
   const [text, setText] = useState("");
+  const [event, setEvent] = useState(false);
+  const [date, setDate] = useState("");
 
   const updateParentState =(newValue: any) =>{
     setText(newValue);
   }
 
-  async function createDataFirestore(title: any, description:any, type: any){
+  async function createDataFirestore(title: any, description:any, type: any, date: any){
     try{
       const docRef = await addDoc(collection(db, option),{
         title: title,
         description: description,
-        type: type
+        type: type,
+        date: date
       })
       console.log("document written with ID", docRef.id);
     } catch(error){
@@ -32,7 +35,7 @@ const createPost = () => {
     e.preventDefault();
 
     try{
-    const submit = await createDataFirestore(title, text, option);
+    const submit = await createDataFirestore(title, text, option,date);
 
     setTitle("");
     setText("");
@@ -42,6 +45,18 @@ const createPost = () => {
   } catch(error){
     console.log("ERROR", error);
   }
+}
+
+const handleEventBtn = () =>{
+  setOption("event");
+  setEvent(true);
+
+  console.log("option", option, " event", event);
+}
+
+const handleBlogBtn = () =>{
+  setOption("blog");
+  setEvent(false);
 }
 
 
@@ -64,20 +79,28 @@ const createPost = () => {
 
           <p className='mb-4 text-xl'>Izaberite opciju:</p>
             <div className='flex justify-center items-center mb-5'>
-              <button type='button' className='px-8 bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-2 
+              <button type='button' 
+              className='px-8 bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-2 
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
                        xxs:text-sm sm:text-lg'
-                       onClick={()=>setOption("blog")}>
+                       onClick={()=>handleBlogBtn()}>
                         Blog
              </button>
 
               <button type='button' className='px-8 bg-[#F93EDF] ml-5 text-white border border-[2px] border-[#F93EDF] rounded-full py-2 
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
                        xxs:text-sm sm:text-lg'
-                       onClick={()=>setOption("event")}
+                       onClick={()=>handleEventBtn()}
                        >
                         Događaj
               </button>
+            </div>
+
+            <div className={event ? 'w-full block' : "hidden"}>
+              <p className='text-xl'>Izaberite datum dogadjaja</p>
+              <input type="date" className='w-[50%] py-3 mt-6 mb-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
+              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
+              onChange={(e)=>setDate(e.target.value)}/>
             </div>
 
         <p>Tekst objave</p>

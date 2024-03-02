@@ -1,8 +1,8 @@
-interface Post {
+interface Event {
     id: number,
     title: string,
     description: string,
     date: string
 }
 
-export default Post;
+export default Event;
