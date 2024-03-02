@@ -63,6 +63,11 @@ const Navbar = () => {
                     <p className={nav ? "hidden" : 'pl-10'}>Moje objave</p>
                 </Link>
 
+                <Link href="/dashboard/events" className='flex flex-row items-center justify-start pt-7 text-xl cursor-pointer hover:text-red-400'>
+                    <FaFileAlt /> 
+                    <p className={nav ? "hidden" : 'pl-10'}>Moji dogadjaji</p>
+                </Link>
+
                 <Link href="/login" onClick={()=>signOut()} className='flex flex-row items-center pt-7 text-xl cursor-pointer hover:text-red-400'>
                     <CiLogout />
                     <p className={nav ? "hidden" : 'pl-10'}>Odjavi se</p>
