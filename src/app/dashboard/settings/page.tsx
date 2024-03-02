@@ -8,7 +8,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 const Profile = () => {
 
 
-  const [email,setEmail] = useState("denis.kantic18@gmail.com");
+  const [email,setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
