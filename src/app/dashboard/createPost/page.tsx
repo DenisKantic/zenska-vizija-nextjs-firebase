@@ -3,10 +3,6 @@ import React,{useState} from 'react';
 import MyRichTextEditor from './TextEditor';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/app/FirebaseConfig';
-import { useSession } from 'next-auth/react'
-
-
-
 
 
 const createPost = () => {
@@ -18,9 +14,6 @@ const createPost = () => {
   const updateParentState =(newValue: any) =>{
     setText(newValue);
   }
-
-  const session = useSession();
-  const user = session?.data?.user;
 
   async function createDataFirestore(title: any, description:any, type: any){
     try{
@@ -51,8 +44,6 @@ const createPost = () => {
   }
 }
 
-
-  
 
   return (
     <div className='w-full h-screen overflow-y-scroll p-10'>
