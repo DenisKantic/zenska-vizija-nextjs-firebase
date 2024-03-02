@@ -1,17 +1,27 @@
 "use client"
-import React,{useState} from 'react'
+import React,{useState} from 'react';
+import MyRichTextEditor from './TextEditor';
+
+
 
 const createPost = () => {
 
   const [title,setTitle] = useState("");
   const [option, setOption] = useState("blog");
+  const [text, setText] = useState("");
 
+  {console.log(text)}
+
+  const updateParentState =(newValue: any) =>{
+    setText(newValue);
+  }
+  
 
   return (
-    <div className='w-full h-screen'>
+    <div className='w-full min-h-screen overflow-y-scroll'>
       <h1 className='text-4xl'>Kreiraj objavu</h1>
 
-      <div className='flex flex-col justify-start items-start mt-10'>
+      <div className='flex flex-col justify-start items-start mt-10 min-h-screen'>
         <p className='text-xl'>Naslov objave</p>
         <input 
         type="text" 
@@ -41,7 +51,12 @@ const createPost = () => {
             </div>
 
         <p>Tekst objave</p>
-        <textarea cols="10" rows="10"></textarea>
+        
+      <MyRichTextEditor onTextChange={updateParentState} />
+
+      <div className='border-[2px] border-black w-full h-[50vh]'>
+        <textarea cols={30} rows={10} value={text} disabled></textarea>
+      </div>
 
         <p>Ubacite sliku ili video</p>
         <input type="file" placeholder='Ubacite sliku' />
