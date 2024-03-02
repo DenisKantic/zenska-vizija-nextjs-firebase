@@ -28,20 +28,19 @@ const MyRichTextEditor: React.FC<MyRichTextEditorProps> = ({ onTextChange, ...pr
   return (
     <QuillEditor
       value={text}
-      className='h-[50vh] bg-white overflow-hiddendw
+      className='h-[50vh] bg-white overflow-hidden
                 xxs:w-full md:w-[90%]'
       onChange={handleChange}
       modules={{
         toolbar: [
           [{ color: ['blue', '#F93EDF', 'red', 'pink', 'black'] }],
-          ['bold', 'italic', 'underline'],
+          ['bold', 'italic', 'underline', 'strike'],
           ['link', 'image'],
-          ['clean'],
-          [{ 'indent': '+1' }]
+          ['clean']
         ],
       }}
       formats={[
-        'indent',
+        'strike',
         'bold',
         'italic',
         'underline',

@@ -54,12 +54,12 @@ const createPost = () => {
         
       <MyRichTextEditor onTextChange={updateParentState} />
  
-     {/* za testiranje teksta nakon upisivanja u editor<p
+    {/* za testiranje teksta nakon upisivanja u editor<p
       dangerouslySetInnerHTML={{__html: text }} 
-      className='border-[2px] border-black w-[50%] min-h-[50vh] text-lg'>
-        
+      className='w-[50%] min-h-[50vh] text-lg'>
       </p>
-       */} 
+  */}
+
 
       </div>
       </div>
