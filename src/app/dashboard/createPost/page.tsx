@@ -3,12 +3,12 @@ import React,{useState} from 'react';
 import MyRichTextEditor from './TextEditor';
 
 
-
 const createPost = () => {
 
   const [title,setTitle] = useState("");
   const [option, setOption] = useState("blog");
   const [text, setText] = useState("");
+
 
   {console.log(text)}
 
@@ -53,13 +53,14 @@ const createPost = () => {
         <p>Tekst objave</p>
         
       <MyRichTextEditor onTextChange={updateParentState} />
+ 
+     {/* za testiranje teksta nakon upisivanja u editor<p
+      dangerouslySetInnerHTML={{__html: text }} 
+      className='border-[2px] border-black w-[50%] min-h-[50vh] text-lg'>
+        
+      </p>
+       */} 
 
-      <div className='border-[2px] border-black w-full h-[50vh]'>
-        <textarea cols={30} rows={10} value={text} disabled></textarea>
-      </div>
-
-        <p>Ubacite sliku ili video</p>
-        <input type="file" placeholder='Ubacite sliku' />
       </div>
       </div>
      
