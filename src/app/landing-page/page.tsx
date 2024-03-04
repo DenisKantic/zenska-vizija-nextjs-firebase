@@ -10,6 +10,7 @@ import Gallery from "./gallery/Gallery";
 import ImageSection from "./image-section/ImageSection";
 import GreetingBlock from "./greeting-block/GreetingBlock";
 import Contact from "./contact/Contact";
+import Footer from "./footer/Footer";
 
 const LandingPage = () => {
   return (
@@ -23,6 +24,7 @@ const LandingPage = () => {
       <ImageSection />
       <GreetingBlock />
       <Contact />
+      <Footer />
     </div>
   );
 };
