@@ -9,6 +9,7 @@ import Blog from "./blog/Blog";
 import Gallery from "./gallery/Gallery";
 import ImageSection from "./image-section/ImageSection";
 import GreetingBlock from "./greeting-block/GreetingBlock";
+import Contact from "./contact/Contact";
 
 const LandingPage = () => {
   return (
@@ -21,6 +22,7 @@ const LandingPage = () => {
       <Gallery />
       <ImageSection />
       <GreetingBlock />
+      <Contact />
     </div>
   );
 };
