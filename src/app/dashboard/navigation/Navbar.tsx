@@ -9,18 +9,14 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { signOut, useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
+import { useAuth } from "@/app/AuthContext";
 
 
 const Navbar = () => {
 
-    const [nav,setNav] = useState(false);
+    const { logout } = useAuth();
 
-    const session = useSession({
-        required: true,
-        onUnauthenticated() {
-          redirect('/login');
-        },
-      })
+    const [nav,setNav] = useState(false);
 
   return (
     <div className=
@@ -68,7 +64,7 @@ const Navbar = () => {
                     <p className={nav ? "hidden" : 'pl-10'}>Moji dogadjaji</p>
                 </Link>
 
-                <Link href="/login" onClick={()=>signOut()} className='flex flex-row items-center pt-7 text-xl cursor-pointer hover:text-red-400'>
+                <Link href="/login" onClick={()=>logout} className='flex flex-row items-center pt-7 text-xl cursor-pointer hover:text-red-400'>
                     <CiLogout />
                     <p className={nav ? "hidden" : 'pl-10'}>Odjavi se</p>
                 </Link>

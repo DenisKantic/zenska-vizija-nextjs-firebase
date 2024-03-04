@@ -1,39 +1,31 @@
 "use client"
 import React, {useEffect, useState} from 'react'
 import Image from 'next/image'
-import { signIn, useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useAuth } from "@/app/AuthContext";
+
 
 
 const Login = () => {
 
-  const session = useSession();
-
-  const checkUser = () => {   // check if user is logged in. 
-    if(session?.data?.user){
-    redirect('/dashboard'); // if it's already logged in, redirect to dashboard.
-  } else {
-    return null;
-  }
-}
-
-const handleSubmit = (e: any) =>{
-  e.preventDefault();
-  if(email == ""){
-    alert("Unesite vas Email")
-  } else if (password == ""){
-    alert("Unesite vasu sifru")
-  } else {
-  signIn('credentials', {email, password, redirect: true, callbackUrl: '/dashboard'})
-  }
-}
-
-useEffect(()=>{
-  checkUser();
-}) // fire the function
-
+  const router = useRouter();
+  const { user, login } = useAuth();
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+  
+    console.log(user);
+    try {
+      await login(email, password);
+      router.push("/dashboard");
+    } catch (error) {
+      console.log("error u handle submit",error);
+    }
+  };
+
+  {console.log("email:",email, " >>>password:", password)}
 
   return (
     <div 
@@ -56,7 +48,7 @@ useEffect(()=>{
     <div
     className='mx-auto h-[50vh] flex flex-col overflow-hidden
     xxs:w-full xxs:h-full lg:w-[50%] sm:p-0 md:p-10'
-    onSubmit={()=>signIn('credentials', {email,password, redirect:true, callbackUrl: '/dashboard'})}>
+    onSubmit={()=>handleSubmit}>
         <h1 
         className='text-[#AC009B] font-bold p-3
                   xxs:text-2xl sm:text-4xl'>
@@ -66,6 +58,7 @@ useEffect(()=>{
         <input 
         type="email" 
         required 
+        value={email}
         placeholder='Unesite Vaš mail' 
         className='w-full mt-10 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
@@ -82,6 +75,7 @@ useEffect(()=>{
         <input 
         type="password" 
         required 
+        value={password}
         placeholder='Šifra' 
         className='w-full mt-5 py-3 p-7 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
@@ -114,7 +108,7 @@ useEffect(()=>{
             className='w-[45%] bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-2 
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
                        xxs:text-sm sm:text-lg'
-                       onClick={() => signIn('credentials', {email, password, redirect: true, callbackUrl: '/dashboard'})}
+                       type='submit'
                        onKeyDown={(e) => {
                         if (e.key === "Enter")
                           handleSubmit(e);
