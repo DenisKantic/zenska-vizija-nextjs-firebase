@@ -5,7 +5,7 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
-  return <div className="p-10 rounded-md">{children}</div>;
+  return <div>{children}</div>;
 };
 
 export default AuthLayout;
