@@ -14,7 +14,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = getApps().length? getApp() : initializeApp(firebaseConfig);
-const auth = getAuth(); // s obzirom da cemo koristiti auth, moramo ga importovati i upotrijebiti
+const auth = getAuth(app); // s obzirom da cemo koristiti auth, moramo ga importovati i upotrijebiti
 const db = getFirestore(app);
 
 export {app, auth, db} // koristit cemo oba, "app" za samu inicijalizaciju sa firebase i "auth" za auth login
