@@ -4,6 +4,9 @@ import { getDocs, collection,query, orderBy, deleteDoc, doc } from 'firebase/fir
 import { db } from '@/app/FirebaseConfig';
 import Event from './interface'
 import Image from 'next/image';
+import { RiDeleteBinLine } from "react-icons/ri";
+import { FaEdit } from "react-icons/fa";
+
 
     async function fetchDataFirestore(){
         const listCollection = collection(db, "event");
@@ -45,19 +48,32 @@ import Image from 'next/image';
 
     <div className='grid grid-cols-3 gap-20 items-center mt-10 w-full h-full'>
         {userData.map((data)=>(
-        <div className='flex flex-col justify-around w-[300px] h-[350px] bg-red-200' key={data.id}>
+        <div className='flex flex-col justify-around w-[300px] h-[350px] bg-red-200 rounded-xl' key={data.id}>
             <div className='h-full p-2'>
                 <Image src="/images/zenskaBG.png" height={50} width={50}
                 alt='test' unoptimized priority={false}
                 className='w-full h-[200px] object-contain'
                 />
-                <h1 className='text-lg'>Naslov:{data.title}</h1>
-                <p className='text-sm'>ID: {data.id}</p>
-                <p>Date: {data.date}</p>
+                <h1 className='text-lg font-bold'>Naslov:<span className='font-normal ml-2'>{data.title}</span></h1>
+                <p className='text-md font-bold'>Date: <span className='font-normal ml-2'>{data.date}</span></p>
+                <p className='text-md font-bold'>Mjesto: <span className='font-normal ml-2'>{data.location}</span></p>
+                <p dangerouslySetInnerHTML={{__html: data.description}}></p>
              </div>
-        <button className='w-full bg-orange-400 py-3' type='button'
-          onClick={()=>deleteFromDatabase(data.id)}
-        >Obrisi</button>
+
+              <div className='flex flex-row'>
+                  <button className='w-[50%] flex items-center justify-center bg-red-400 py-3
+                  hover:bg-red-600' type='button'
+                    onClick={()=>deleteFromDatabase(data.id)}
+                  >
+                    <RiDeleteBinLine />
+                  </button>
+
+                  <button className='w-[50%] flex items-center justify-center bg-blue-200 py-3
+                  hover:bg-blue-400' type='button'
+                    onClick={()=>deleteFromDatabase(data.id)}
+                  ><FaEdit /></button>
+              </div>
+
         </div>
         ))}
     </div>
