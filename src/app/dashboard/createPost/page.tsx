@@ -1,8 +1,11 @@
 "use client"
-import React,{useState} from 'react';
+import React,{ChangeEvent, useState} from 'react';
 import MyRichTextEditor from './TextEditor';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/app/FirebaseConfig';
+import Form from 'react-bootstrap/Form';
+import {storage} from '@/app/FirebaseConfig'
+import {ref, uploadBytesResumable, UploadTaskSnapshot} from "firebase/storage"
 
 
 const createPost = () => {
@@ -12,10 +15,40 @@ const createPost = () => {
   const [text, setText] = useState("");
   const [event, setEvent] = useState(false);
   const [date, setDate] = useState("");
+  const [image,setImage] = useState<File | null>(null);
+  const [imageName, setImageName] = useState("");
 
   const updateParentState =(newValue: any) =>{
     setText(newValue);
   }
+
+
+  const uploadImage = (e: ChangeEvent<HTMLInputElement>) =>{
+    if(e.target.files && e.target.files[0]){
+      setImage(e.target.files[0])
+    } else {
+      console.log("error upload image")
+    }
+  }
+
+  const handleUpload =()=>{
+    if(image) {
+
+      const storageRef = ref(storage, `images/${image.name}`)
+      const uploadTask = uploadBytesResumable(storageRef, image);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot: UploadTaskSnapshot)=>{
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+          console.log(`Upload is ${progress}$ done`);
+        }, error =>{
+          console.log(error.message);
+        }
+      )
+  }
+}
 
   async function createDataFirestore(title: any, description:any, type: any, date: any){
     try{
@@ -41,6 +74,8 @@ const createPost = () => {
     setText("");
     setOption("");
 
+    handleUpload();
+
     alert("sucessfully created new data");
   } catch(error){
     console.log("ERROR", error);
@@ -65,6 +100,10 @@ const handleBlogBtn = () =>{
       <h1 className='text-4xl'>Kreiraj objavu</h1>
 
       <form onSubmit={handleSubmit}  className='flex flex-col justify-start items-start mt-10 min-h-screen'>
+
+        <p className='text-xl'>Ubacite naslovnu sliku</p>
+        <input type="file" required  onChange={(e:any)=> uploadImage(e)}/>
+          
         <p className='text-xl'>Naslov objave</p>
         <input 
         type="text" 
