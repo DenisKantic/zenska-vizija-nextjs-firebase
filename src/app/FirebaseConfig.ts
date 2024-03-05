@@ -1,6 +1,7 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBfUc-nbbmdQGfgZgNWQMaRog1J9S9HK9s",
@@ -16,5 +17,6 @@ const firebaseConfig = {
 const app = getApps().length? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app); // s obzirom da cemo koristiti auth, moramo ga importovati i upotrijebiti
 const db = getFirestore(app);
+const storage = getStorage(app);
 
-export {app, auth, db} // koristit cemo oba, "app" za samu inicijalizaciju sa firebase i "auth" za auth login
+export {app, auth, db, storage} // koristit cemo oba, "app" za samu inicijalizaciju sa firebase i "auth" za auth login

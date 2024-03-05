@@ -13,6 +13,18 @@ const Login = () => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
 
+  const checkUserState = () =>{
+    if(user){
+      router.push('/dashboard');
+    } else {
+      router.push('login');
+    }
+  }
+  
+  useEffect(()=>{
+    checkUserState();
+  });
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
   
@@ -25,7 +37,6 @@ const Login = () => {
     }
   };
 
-  {console.log("email:",email, " >>>password:", password)}
 
   return (
     <div 
