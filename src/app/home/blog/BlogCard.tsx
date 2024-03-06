@@ -17,13 +17,15 @@ const BlogCard: React.FC<BlogCardProps> = ({
   return (
     <div
       className="mx-auto overflow-hidden bg-white rounded-[16px] shadow-lg 
-				flex flex-col justify-center items-center"
+				flex flex-col justify-center items-center shadow-chineseBlackLight"
     >
       <div className="relative flex">
         <Image
-          className="object-cover w-[600px] h-[416px]"
+          className="object-cover w-full h-full"
           src={imageUrl}
           alt={title}
+          width={600}
+          height={416}
         />
         <div
           className="absolute top-[50%] inset-0 flex my-4 mx-4 py-2 px-2

@@ -11,7 +11,7 @@ const HeroSection = () => {
         >
           <div className="leading-5">
             <h1 className="sm:text-4xl text-5xl mb-4 font-bold text-white">
-              U ZNAK <br /> SOLIDARNOSTI <br /> ZA NAŠA PRAVA
+              U ZNAK SOLIDARNOST ZA NAŠA PRAVA
             </h1>
             <p className="text-white mb-8 text-[20px]">
               Posvećeni smo borbi za pravednost, jednakost i autonomiju svih

@@ -1,13 +1,28 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import BlogCard from "./BlogCard";
 
 import { blogData } from "./data/dummyData";
 
-import grayArrow from "../../../../public/images/landing/grayArrow.png";
-import pinkArrow from "../../../../public/images/landing/pinkArrow.png";
-
 const Blog = () => {
+  const [startIndex, setStartIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const goToPrevSet = () => {
+    const newIndex = Math.max(startIndex - 3, 0);
+    setStartIndex(newIndex);
+    setCurrentPage(currentPage - 1);
+  };
+
+  const goToNextSet = () => {
+    const newIndex = Math.min(startIndex + 3, blogData.length - 3);
+    setStartIndex(newIndex);
+    setCurrentPage(currentPage + 1);
+  };
+
+  const totalPages = Math.ceil(blogData.length / 3);
+
   return (
     <div className="py-8">
       <div
@@ -49,6 +64,26 @@ const Blog = () => {
             tag={blog.tag}
           />
         ))}
+      </div>
+      {/* Pagination */}
+      <div className="flex justify-center mt-4">
+        <button
+          onClick={goToPrevSet}
+          className="h-8 w-8 mr-2 text-gray-500 hover:text-gray-700"
+          disabled={startIndex === 0}
+        >
+          &lt;
+        </button>
+        <span className="text-chineseBlack mr-1 mt-1">
+          {currentPage}/{totalPages}
+        </span>
+        <button
+          onClick={goToNextSet}
+          className="h-8 w-8 ml-2 text-gray-500 hover:text-gray-700"
+          disabled={startIndex + 3 >= blogData.length}
+        >
+          &gt;
+        </button>
       </div>
     </div>
   );

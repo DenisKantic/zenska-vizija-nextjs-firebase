@@ -1,49 +1,38 @@
-import gallery1 from "../../../../../public/images/landing/gallery/gallery_1.png"
-import gallery2 from "../../../../../public/images/landing/gallery/gallery_2.png"
-import gallery3 from "../../../../../public/images/landing/gallery/gallery_3.png"
-import gallery4 from "../../../../../public/images/landing/gallery/gallery_4.png"
-import gallery5 from "../../../../../public/images/landing/gallery/gallery_5.png"
-import gallery6 from "../../../../../public/images/landing/gallery/gallery_6.png"
-import gallery7 from "../../../../../public/images/landing/gallery/gallery_7.png"
-import gallery8 from "../../../../../public/images/landing/gallery/gallery_8.png"
-import gallery9 from "../../../../../public/images/landing/gallery/gallery_9.png"
-
-
 export const imageList = [
   {
     id: 1,
-    imgSrc: gallery1
+    imgSrc: "/images/landing/gallery/gallery_1.png",
   },
   {
     id: 2,
-    imgSrc: gallery4
+    imgSrc: "/images/landing/gallery/gallery_4.png"
   },
   {
     id: 3,
-    imgSrc: gallery7
+    imgSrc: "/images/landing/gallery/gallery_7.png"
   },
   {
     id: 4,
-    imgSrc: gallery2
+    imgSrc: "/images/landing/gallery/gallery_2.png"
   },
   {
     id: 5,
-    imgSrc: gallery5
+    imgSrc: "/images/landing/gallery/gallery_5.png"
   },
   {
     id: 6,
-    imgSrc: gallery9
+    imgSrc: "/images/landing/gallery/gallery_9.png"
   },
   {
     id: 7,
-    imgSrc: gallery8
+    imgSrc: "/images/landing/gallery/gallery_8.png"
   },
   {
     id: 8,
-    imgSrc: gallery6
+    imgSrc: "/images/landing/gallery/gallery_6.png"
   },
   {
     id: 9,
-    imgSrc: gallery3
+    imgSrc: "/images/landing/gallery/gallery_3.png"
   },
 ]

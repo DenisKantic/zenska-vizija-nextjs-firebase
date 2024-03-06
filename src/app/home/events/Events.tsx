@@ -1,5 +1,7 @@
 "use client";
+import { useState } from "react";
 import EventCard from "./EventCard";
+import Image from "next/image";
 // constants
 import { dummyData } from "./data/dummyData";
 
@@ -14,6 +16,31 @@ const Events = () => {
           Vrlo često organizujemo događaje na razne teme, jer brinemo o našim
           članicama
         </p>
+      </div>
+      <div className="flex mt-4 justify-end items-center mr-4 mb-2 py-4 px-5">
+        <span className="text-chineseBlack mr-4 pr-4">
+          Vidi starije događaje
+        </span>
+        <div className="flex space-x-2 mr-8">
+          <div className="px-2">
+            <Image
+              className="hover:text-purplePizzazz h-full w-full"
+              src="/images/landing/grayArrow.png"
+              alt="grayArrow"
+              width={100}
+              height={100}
+            />
+          </div>
+          <div className="px-3">
+            <Image
+              className=" hover:text-grayy h-full w-full"
+              src="/images/landing/pinkArrow.png"
+              alt="pinkArrow"
+              width={100}
+              height={100}
+            />
+          </div>
+        </div>
       </div>
       <div className="flex flex-wrap mx-4 px-10 py-4">
         <EventCard
