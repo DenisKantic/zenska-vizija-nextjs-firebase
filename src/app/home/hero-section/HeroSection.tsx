@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import heroImg from "../../../../public/images/landing/hero_img.png";
 
 const HeroSection = () => {
   return (
@@ -31,10 +30,11 @@ const HeroSection = () => {
         </div>
         <div className="w-1/2 md:w-1/2">
           <Image
-            className="object-cover object-center"
+            className="object-cover object-center w-full h-full"
             alt="hero"
-            src={heroImg}
-            priority
+            src="/images/landing/hero_img.png"
+            width={600}
+            height={600}
           />
         </div>
       </div>

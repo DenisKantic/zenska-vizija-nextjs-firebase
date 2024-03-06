@@ -1,9 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
-import { dummyData } from "./data/dummyData";
 
-import grayArrow from "../../../../public/images/landing/grayArrow.png";
-import pinkArrow from "../../../../public/images/landing/pinkArrow.png";
+import { dummyData } from "./data/dummyData";
 
 const CardSlider = () => {
   const [startIndex, setStartIndex] = useState(0);
@@ -30,18 +28,22 @@ const CardSlider = () => {
         <div className="flex space-x-2 mr-8">
           <div className="px-2">
             <Image
-              className="hover:text-purplePizzazz"
-              src={grayArrow}
+              className="hover:text-purplePizzazz h-full w-full"
+              src="/images/landing/grayArrow.png"
               alt="grayArrow"
               onClick={goToPrevSet}
+              width={100}
+              height={100}
             />
           </div>
           <div className="px-3">
             <Image
-              className=" hover:text-grayy"
-              src={pinkArrow}
+              className=" hover:text-grayy h-full w-full"
+              src="/images/landing/pinkArrow.png"
               alt="pinkArrow"
               onClick={goToNextSet}
+              width={100}
+              height={100}
             />
           </div>
         </div>

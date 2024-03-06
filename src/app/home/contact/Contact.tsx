@@ -1,12 +1,5 @@
 "use client";
-import React from "react";
 import Image from "next/image";
-
-import facebook from "../../../../public/images/landing/facebook_logo.png";
-import tiktok from "../../../../public/images/landing/tiktok_logo.png";
-import mailIcon from "../../../../public/images/landing/mail_icon.png";
-import locationIcon from "../../../../public/images/landing/location_icon.png";
-import phoneIcon from "../../../../public/images/landing/phone_icon.png";
 
 const Contact = () => {
   return (
@@ -23,35 +16,60 @@ const Contact = () => {
         </p>
         <div className="flex space-x-4 mb-8 mt-4 mr-5">
           <button
-            className="bg-purplePizzazz text-white text-[16px] flex-grow py-3 px-4 rounded-[16px] 
-					flex justify-center items-center space-x-2"
+            className="bg-purplePizzazz text-white hover:bg-grayy text-[16px] flex-grow py-3 px-4 
+            rounded-[16px] flex justify-center items-center space-x-2"
           >
-            <Image src={facebook} alt="facebook-icon" />
+            <Image
+              src="/images/landing/facebook_logo.png"
+              width={12}
+              height={12}
+              alt="facebook-icon"
+            />
             <span>Facebook</span>
           </button>
           <button
             className="bg-crayola text-white text-[16px] flex flex-grow py-3 px-4 rounded-[16px] 
-					justify-center items-center space-x-2"
+					justify-center items-center space-x-2 hover:bg-grayy"
           >
-            <Image src={tiktok} alt="tiktok-icon" />
+            <Image
+              src="/images/landing/tiktok_logo.png"
+              alt="tiktok-icon"
+              width={17}
+              height={17}
+            />
             <span>Tik Tok</span>
           </button>
         </div>
         <div className="flex flex-col space-y-6 pt-2 mt-2">
           <div className="flex items-center space-x-2">
-            <Image src={mailIcon} alt="mail-icon" />
+            <Image
+              src="/images/landing/mail_icon.png"
+              width={19}
+              height={19}
+              alt="mail-icon"
+            />
             <p className="text-[16px] text-chineseBlackLight">
               info@zenska-vizija.org
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <Image src={locationIcon} alt="location-icon" />
+            <Image
+              src="/images/landing/location_icon.png"
+              alt="location-icon"
+              width={18}
+              height={18}
+            />
             <p className="text-[16px] text-chineseBlackLight">
               Mihaila I Zivka Crnogorcevica 9, Tuzla, BiH
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <Image src={phoneIcon} alt="phone-icon" />
+            <Image
+              src="/images/landing/phone_icon.png"
+              alt="phone-icon"
+              width={20}
+              height={20}
+            />
             <p className="text-[16px] text-chineseBlackLight">+38760 123456</p>
           </div>
         </div>

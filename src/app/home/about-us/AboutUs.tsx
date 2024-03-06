@@ -1,9 +1,5 @@
 "use client";
 import Image from "next/image";
-// assets
-import aboutImg from "../../../../public/images/landing/about_us-img.png";
-import aboutImg1 from "../../../../public/images/landing/about_us_1.png";
-import aboutImg2 from "../../../../public/images/landing/about_us_2.png";
 
 const AboutUs = () => {
   return (
@@ -13,24 +9,30 @@ const AboutUs = () => {
           <div className="w-full h-full flex flex-col">
             <div className="h-[50%]">
               <Image
-                className="object-center object-cover rounded-[24px] w-[592px] h-[392px] p-2"
+                className="object-cover rounded-[24px] w-[592px] h-[392px] p-3"
                 alt="hero"
-                src={aboutImg}
+                src="/images/landing/about_us-img.png"
+                width={592}
+                height={392}
               />
             </div>
-            <div className="flex w-full h-[50%] pr-4 py-4">
-              <div className="w-1/2 p-2">
+            <div className="flex w-full h-[50%] pr-4 py-1">
+              <div className="w-1/2 p-3">
                 <Image
-                  src={aboutImg1}
+                  src="/images/landing/about_us_1.png"
                   alt="Image 1"
                   className="object-cover object-center rounded-[24px] w-full h-full"
+                  width={200}
+                  height={200}
                 />
               </div>
-              <div className="w-1/2 p-2">
+              <div className="w-1/2 p-3">
                 <Image
-                  src={aboutImg2}
+                  src="/images/landing/about_us_2.png"
                   alt="Image 2"
                   className="object-cover object-center rounded-[24px] w-full h-full"
+                  width={200}
+                  height={200}
                 />
               </div>
             </div>
