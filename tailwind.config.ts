@@ -15,13 +15,23 @@ const config: Config = {
       'lg': '1000px'
     },
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      backdropBlur: {
+        xs: "2px",
+      },
+      colors: {
+        lotion: "#FAFAFA", // white
+        purplePizzazz: "#f93edf", // pink
+        platinum: "#E7E7E7", // light-gray
+        magnolia: "#FEF1FD",
+        crayola: "#97427B",
+        chineseBlack: "#141414", // dark-gray
+        chineseBlackLight: "#121212",
+        grayy: "#808080",
+        brightGray: "#EDF1ED",
+        quartz: "#4A4A4A", // black
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };
 export default config;
