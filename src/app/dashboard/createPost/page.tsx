@@ -3,7 +3,6 @@ import React,{ChangeEvent, useState} from 'react';
 import MyRichTextEditor from './TextEditor';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '@/app/FirebaseConfig';
-import Form from 'react-bootstrap/Form';
 import {storage} from '@/app/FirebaseConfig'
 import {ref, uploadBytesResumable, UploadTaskSnapshot} from "firebase/storage"
 
