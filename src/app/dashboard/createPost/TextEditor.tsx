@@ -29,7 +29,7 @@ const MyRichTextEditor: React.FC<MyRichTextEditorProps> = ({ onTextChange, ...pr
     <QuillEditor
       value={text}
       className='h-[45vh] bg-white overflow-hidden
-                xxs:w-full'
+                xxs:w-[95%]'
       onChange={handleChange}
       modules={{
         toolbar: [
