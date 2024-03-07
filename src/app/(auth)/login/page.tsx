@@ -56,10 +56,10 @@ const Login = () => {
         />
     </div>
 
-    <div
+    <form
     className='mx-auto h-[50vh] flex flex-col overflow-hidden
     xxs:w-full xxs:h-full lg:w-[50%] sm:p-0 md:p-10'
-    onSubmit={()=>handleSubmit}>
+    onSubmit={(e)=>handleSubmit(e)}>
         <h1 
         className='text-[#AC009B] font-bold p-3
                   xxs:text-2xl sm:text-4xl'>
@@ -129,7 +129,7 @@ const Login = () => {
             </button>
         </div>
 
-    </div>
+    </form>
 
     <div className='flex p-10 w-[50%] h-[50vh] xxs:hidden lg:block'>
         <Image 
