@@ -4,7 +4,8 @@ interface Event {
     description: string,
     date: string,
     location: string,
-    imageURL: string
+    imageURL: string,
+    time: string
 }
 
 export default Event;

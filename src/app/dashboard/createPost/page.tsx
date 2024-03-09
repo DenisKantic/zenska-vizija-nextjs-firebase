@@ -48,11 +48,9 @@ const createPost = () => {
       try{
       if(image){
       const storageRef = ref(storage, `images/${image.name}`)
-      uploadBytes(storageRef, image);
+      await uploadBytes(storageRef, image);
       console.log(`Upload is done`);
       const downloadURL = await getDownloadURL(storageRef)
-      console.log("URL slike", downloadURL)
-
       const submit = createDataFirestore(title, text, option,formattedDate, location, time, downloadURL);    
       console.log("sucessfully created new data");
         }

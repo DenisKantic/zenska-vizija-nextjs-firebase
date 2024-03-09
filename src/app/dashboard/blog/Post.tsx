@@ -4,6 +4,8 @@ import { getDocs, collection,query, orderBy, deleteDoc, doc } from 'firebase/fir
 import { db } from '@/app/FirebaseConfig';
 import Post from './interface'
 import Image from 'next/image';
+import { RiDeleteBinLine } from "react-icons/ri";
+import { FaEdit } from "react-icons/fa";
 
     async function fetchDataFirestore(){
         const listCollection = collection(db, "blog");
@@ -41,31 +43,38 @@ import Image from 'next/image';
           console.log(error);
         }
       }
-
+ 
   return (
-
-    <div className='grid grid-cols-3 gap-20 grid-flow-row items-center mt-10 w-full h-full'>
+    <div className='grid items-center justify-center mt-10 w-full h-full grid-flow-row auto-cols-max
+    xxs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-20'>
         {userData.map((data)=>(
-        <div className='flex flex-col justify-around w-[300px] h-[350px] bg-red-200' key={data.id}>
-            <div className='h-full p-2'>
-          <Image
-            src={data.imageURL}
-            height={200}
-            width={200}
-            alt='test'
-            unoptimized
-            className='w-full h-[200px] object-contain'
-          />
-                <h1 className='text-lg'>Naslov:{data.title}</h1>
-                <p className='text-sm'>ID: {data.id}</p>
-                <p>Date: {data.date}</p>
-                <p>IMAGE: {data.imageURL.toString()}</p>
-             </div>
-        <button 
-        className='w-full bg-orange-400 py-3'
-        onClick={()=>deleteFromDatabase(data.id)}
-        >Obrisi</button>
-        </div>
+        <div className='flex flex-col justify-around bg-red-100 mt-10' key={data.id}>
+        <div className='h-full rounded-xl'>
+            <Image src={data.imageURL} height={50} width={50}
+            alt='test' unoptimized priority={false}
+            className='w-full h-[230px] object-cover'
+            />
+            <div className='p-2 h-full overflow-hidden'>
+            <h1 className='text-lg font-bold'>Naslov:<span className='font-normal ml-2'>{data.title}</span></h1>
+            <p className='text-md font-bold'>Tekst: <span className='font-normal ml-2' dangerouslySetInnerHTML={{__html: data.description }}>
+            </span></p>
+            </div>
+         </div>
+
+          <div className='flex flex-row'>
+              <button className='w-[50%] flex items-center justify-center bg-red-400 py-3 cursor-pointer
+              hover:bg-red-600' type='button'
+                onClick={()=>deleteFromDatabase(data.id)}
+              >
+                <RiDeleteBinLine />
+              </button>
+
+              <button className='w-[50%] flex items-center justify-center bg-blue-200 py-3 cursor-pointer
+              hover:bg-blue-400' type='button'
+                onClick={()=>deleteFromDatabase(data.id)}
+              ><FaEdit /></button>
+          </div>
+          </div>
         ))}
     </div>
   )
