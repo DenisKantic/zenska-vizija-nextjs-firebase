@@ -3,7 +3,8 @@ interface Event {
     title: string,
     description: string,
     date: string,
-    location: string
+    location: string,
+    imageURL: string
 }
 
 export default Event;

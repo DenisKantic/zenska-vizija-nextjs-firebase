@@ -1,10 +1,10 @@
 "use client"
 import React,{ChangeEvent, useState} from 'react';
 import MyRichTextEditor from './TextEditor';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, updateDoc, getFirestore, doc } from 'firebase/firestore';
 import { db } from '@/app/FirebaseConfig';
 import {storage} from '@/app/FirebaseConfig'
-import {ref, uploadBytesResumable, UploadTaskSnapshot} from "firebase/storage"
+import {ref, uploadBytes, uploadBytesResumable, getDownloadURL} from "firebase/storage"
 import { TbCameraPlus } from "react-icons/tb";
 
 
@@ -20,6 +20,8 @@ const createPost = () => {
   const [location, setLocation] = useState("");
   const [formattedDate, setFormattedDate] = useState('');
   const [error, setError] = useState(false);
+  const [time,setTime] = useState("")
+  const [imageURL, setImageURL] = useState("");
 
   const formatDate = (e:any) => {
     const rawDateValue = e.target.value;
@@ -41,54 +43,49 @@ const createPost = () => {
     }
   }
 
-  const handleUpload =()=>{
-    if(image) {
 
+  const handleUploadImage = async ()=>{
+      try{
+      if(image){
       const storageRef = ref(storage, `images/${image.name}`)
-      const uploadTask = uploadBytesResumable(storageRef, image);
+      uploadBytes(storageRef, image);
+      console.log(`Upload is done`);
+      const downloadURL = await getDownloadURL(storageRef)
+      console.log("URL slike", downloadURL)
 
-      uploadTask.on(
-        'state_changed',
-        (snapshot: UploadTaskSnapshot)=>{
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-
-          console.log(`Upload is ${progress}$ done`);
-        }, error =>{
-          console.log(error.message);
+      const submit = createDataFirestore(title, text, option,formattedDate, location, time, downloadURL);    
+      console.log("sucessfully created new data");
         }
-      )
-  }
-}
+      } catch (error){
+        console.log("error in handleUploadImage", error)
+      }
+    }
 
-  async function createDataFirestore(title: any, description:any, type: any, date: any, location: any){
+
+  async function createDataFirestore(title: any, description:any, type: any, date: any, location: any, time: any, imageURL: string){
     try{
       const docRef = await addDoc(collection(db, option),{
         title: title,
         description: description,
         type: type,
         date: date,
-        location: location
+        time: time,
+        location: location,
+        imageURL: imageURL
       })
       console.log("document written with ID", docRef.id);
     } catch(error){
-      console.log("error, something bad " ,error);
+      console.log("error, something bad in createDataFirestore " ,error);
     }
   }
 
   const handleSubmit = async (e: any) =>{
     e.preventDefault();
-
     try{
-      const submit = await createDataFirestore(title, text, option,formattedDate, location);
-      setTitle("");
-      setText("");
-      setOption("");
-      setLocation("");
-      setFormattedDate("")
-      handleUpload();
-      alert("sucessfully created new data");
+      const imageUpload = await handleUploadImage();
+      console.log("sucess in handleSubmit");
    } catch(error){
-    console.log("ERROR", error);
+    console.log("ERROR in handleSubmit", error);
   }
 }
 
@@ -101,6 +98,7 @@ const handleEventBtn = () =>{
 const handleBlogBtn = () =>{
   setOption("blog");
   setEvent(false);
+  console.log(option)
 }
 
 
@@ -139,14 +137,14 @@ const handleBlogBtn = () =>{
           <p className='mb-4 text-xl'>Izaberite opciju:</p>
             <div className='flex justify-center items-center mb-5'>
               <button type='button' 
-              className='px-8 bg-[#F93EDF] text-white border border-[2px] border-[#F93EDF] rounded-full py-1 
+              className='px-8 bg-[#F93EDF] text-white border-[2px] border-[#F93EDF] rounded-full py-1 
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
                        xxs:text-sm sm:text-lg'
                        onClick={()=>handleBlogBtn()}>
                         Blog
              </button>
 
-              <button type='button' className='px-8 bg-[#F93EDF] ml-5 text-white border border-[2px] border-[#F93EDF] rounded-full py-1
+              <button type='button' className='px-8 bg-[#F93EDF] ml-5 text-white  border-[2px] border-[#F93EDF] rounded-full py-1
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
                        xxs:text-sm sm:text-lg'
                        onClick={()=>handleEventBtn()}
@@ -173,6 +171,13 @@ const handleBlogBtn = () =>{
               onChange={(e)=>setLocation(e.target.value)}/>
             </div>
 
+            <div className={event ? 'w-full block' : "hidden"}>
+              <p className='text-xl'>Vrijeme održavanja</p>
+              <input type="text" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
+              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
+              onChange={(e)=>setTime(e.target.value)}/>
+            </div>
+
         <p className='text-xl mb-5 mt-5'>Tekst objave</p>
         
       <MyRichTextEditor onTextChange={updateParentState} />
@@ -183,7 +188,7 @@ const handleBlogBtn = () =>{
       </p>
   */}
 
-          <button className='px-8 bg-[#F93EDF] mt-5 text-white border border-[2px] border-[#F93EDF] rounded-full py-1
+          <button className='px-8 bg-[#F93EDF] mt-5 text-white border-[2px] border-[#F93EDF] rounded-full py-1
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
                        xxs:text-sm sm:text-lg'
                        type='submit'

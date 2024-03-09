@@ -20,6 +20,7 @@ import Image from 'next/image';
     const UserDataFetcher: React.FC = () => {
     const [userData, setUserData] = useState<Post[]>([]);
     const [title, setTitle] = useState("");
+    const [imageUrl, setImageUrl] = useState("")
 
 
     useEffect(()=>{
@@ -47,13 +48,18 @@ import Image from 'next/image';
         {userData.map((data)=>(
         <div className='flex flex-col justify-around w-[300px] h-[350px] bg-red-200' key={data.id}>
             <div className='h-full p-2'>
-                <Image src="/images/zenskaBG.png" height={50} width={50}
-                alt='test' unoptimized
-                className='w-full h-[200px] object-contain'
-                />
+          <Image
+            src={data.imageURL}
+            height={200}
+            width={200}
+            alt='test'
+            unoptimized
+            className='w-full h-[200px] object-contain'
+          />
                 <h1 className='text-lg'>Naslov:{data.title}</h1>
                 <p className='text-sm'>ID: {data.id}</p>
                 <p>Date: {data.date}</p>
+                <p>IMAGE: {data.imageURL.toString()}</p>
              </div>
         <button 
         className='w-full bg-orange-400 py-3'

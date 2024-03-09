@@ -50,7 +50,7 @@ import { FaEdit } from "react-icons/fa";
         {userData.map((data)=>(
         <div className='flex flex-col justify-around w-[300px] h-[350px] bg-red-200 rounded-xl' key={data.id}>
             <div className='h-full p-2'>
-                <Image src="/images/zenskaBG.png" height={50} width={50}
+                <Image src={data.imageURL} height={50} width={50}
                 alt='test' unoptimized priority={false}
                 className='w-full h-[200px] object-contain'
                 />
