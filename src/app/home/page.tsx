@@ -1,11 +1,32 @@
-import React from 'react'
+"use client";
+import React from "react";
+// components
+import HeroSection from "./hero-section/HeroSection";
+import AboutUs from "./about-us/AboutUs";
+import Programs from "./programs/Programs";
+import Events from "./events/Events";
+import Blog from "./blog/Blog";
+import Gallery from "./gallery/Gallery";
+import ImageSection from "./image-section/ImageSection";
+import GreetingBlock from "./greeting-block/GreetingBlock";
+import Contact from "./contact/Contact";
+import Footer from "./footer/Footer";
 
-const Landing = () => {
+const LandingPage = () => {
   return (
-    <div>
-        <h1>Landing</h1>
+    <div className="bg-brightGray">
+      <HeroSection />
+      <AboutUs />
+      <Programs />
+      <Events />
+      <Blog />
+      <Gallery />
+      <ImageSection />
+      <GreetingBlock />
+      <Contact />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Landing
+export default LandingPage;
