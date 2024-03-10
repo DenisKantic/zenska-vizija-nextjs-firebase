@@ -24,7 +24,7 @@ const Blog = () => {
   const totalPages = Math.ceil(blogData.length / 3);
 
   return (
-    <div className="py-8">
+    <div id="blog" className="py-8">
       <div
         className="flex items-center justify-center font-bold text-5xl 
       pt-10 pb-4 px-6 mb-4 mt-10 text-chineseBlack"
@@ -58,6 +58,7 @@ const Blog = () => {
         {blogData.map((blog) => (
           <BlogCard
             key={blog.id}
+            blogId={blog.id}
             imageUrl={blog.imageUrl}
             title={blog.title}
             description={blog.description}

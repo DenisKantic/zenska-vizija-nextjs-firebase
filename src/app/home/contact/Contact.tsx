@@ -3,8 +3,8 @@ import Image from "next/image";
 
 const Contact = () => {
   return (
-    <div className="flex justify-center items-center mt-12 mx-10 px-8 mb-8 py-4 bg-lotion rounded-[16px]">
-      <div className="flex flex-col w-1/2 py-4 px-5">
+    <div id="contact" className="p-2 flex flex-col md:flex-row justify-center items-center mt-12 mx-10 md:px-8 mb-8 py-4 bg-lotion rounded-[16px]">
+      <div className="flex flex-col w-full md:w-1/2 py-4 px-5">
         <div className="mb-4 py-4 mt-7">
           <h2 className="text-5xl text-chineseBlackLight font-bold ">
             Kontakt
@@ -74,7 +74,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <div className="w-1/2 p-8">
+      <div className="w-full md:w-1/2 p-2 md:p-8">
         {/* Embedded Google Map */}
         <iframe
           className="w-full h-full rounded-[16px] mt-4"

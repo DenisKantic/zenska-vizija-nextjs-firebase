@@ -1,8 +1,13 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import phoneIcon from "../../../../public/images/landing/phone_icon.png";
 
 const Footer = () => {
+  const scrollTo = (route: any) => {
+    const element = document.getElementById(`${route}`);
+    if (element) element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  }
   return (
     <>
       <div
@@ -28,32 +33,34 @@ const Footer = () => {
             <nav className="list-none mb-10 py-2 gap-2 flex flex-col items-start cursor-pointer text-[14px]">
               <li>
                 <a className="text-chineseBlackLight hover:text-crayola">
+                <Link href='/about_us'>
                   O nama
+                  </Link>
                 </a>
               </li>
-              <li>
+              <li onClick={() => scrollTo('programs')}>
                 <a className="text-chineseBlackLight hover:text-crayola">
                   Programi
                 </a>
               </li>
-              <li>
+              <li onClick={() => scrollTo('events')}>
                 <a className="text-chineseBlackLight hover:text-crayola">
                   Događaji
                 </a>
               </li>
-              <li>
+              <li onClick={() => scrollTo('blog')}>
                 <a className="text-chineseBlackLight hover:text-crayola">
                   Blog
                 </a>
               </li>
-              <li>
+              <li onClick={() => scrollTo('gallery')}>
                 <a className="text-chineseBlackLight hover:text-crayola">
                   Galerija
                 </a>
               </li>
             </nav>
           </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full pl-4 ml-2">
+          <div className="lg:w-1/4 md:w-1/2 w-full md:pl-4 ml-2">
             <div className="flex flex-col items-start cursor-pointer gap-2">
               <h2 className="font-medium text-chineseBlackLight text-[16px] mb-4">
                 Podrška
@@ -69,7 +76,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full pl-4 ml-4">
+          <div className="lg:w-1/4 md:w-1/2 w-full md:pl-4 ml-2">
             <h2 className="font-medium text-chineseBlackLight text-[16px] mb-4">
               Kontakt
             </h2>
