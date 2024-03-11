@@ -13,9 +13,9 @@ const Blog = () => {
 
   // get blogs from firestore
   const getBlogs = () => {
-    const eventsCollectionRef = collection(db, "event");
+    const blogsCollectionRef = collection(db, "event");
 
-    getDocs(eventsCollectionRef)
+    getDocs(blogsCollectionRef)
       .then((response) => {
         const blogData: any = response.docs.map((doc) => ({
           data: doc.data(),
