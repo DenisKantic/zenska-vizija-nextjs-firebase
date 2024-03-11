@@ -13,7 +13,7 @@ const Blog = () => {
 
   // get blogs from firestore
   const getBlogs = () => {
-    const blogsCollectionRef = collection(db, "event");
+    const blogsCollectionRef = collection(db, "blog");
 
     getDocs(blogsCollectionRef)
       .then((response) => {
