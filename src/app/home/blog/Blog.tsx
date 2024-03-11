@@ -1,27 +1,53 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+// firebase
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/app/FirebaseConfig";
+// components
 import BlogCard from "./BlogCard";
-
-import { blogData } from "./data/dummyData";
 
 const Blog = () => {
   const [startIndex, setStartIndex] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [blogs, setBlogs] = useState([]);
 
-  const goToPrevSet = () => {
-    const newIndex = Math.max(startIndex - 3, 0);
-    setStartIndex(newIndex);
-    setCurrentPage(currentPage - 1);
+  // get blogs from firestore
+  const getBlogs = () => {
+    const eventsCollectionRef = collection(db, "event");
+
+    getDocs(eventsCollectionRef)
+      .then((response) => {
+        const blogData: any = response.docs.map((doc) => ({
+          data: doc.data(),
+          id: doc.id,
+        }));
+        setBlogs(blogData);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
-  const goToNextSet = () => {
-    const newIndex = Math.min(startIndex + 3, blogData.length - 3);
-    setStartIndex(newIndex);
-    setCurrentPage(currentPage + 1);
+  useEffect(() => {
+    getBlogs();
+  }, []);
+
+  useEffect(() => {
+    console.log("svi blogovi: ", blogs);
+  }, [blogs]);
+
+  // pagination logic
+  const handleNextBlogs = () => {
+    setStartIndex((prevIndex) => prevIndex + 4);
   };
 
-  const totalPages = Math.ceil(blogData.length / 3);
+  const handlePrevBlogs = () => {
+    setStartIndex((prevIndex) => Math.max(prevIndex - 4, 0));
+  };
+
+  const currentBlogs = blogs.slice(startIndex, startIndex + 4);
+  const currentPage = Math.floor(startIndex / 4) + 1;
+  const totalPages = Math.ceil(blogs.length / 4);
 
   return (
     <div className="py-8">
@@ -31,6 +57,7 @@ const Blog = () => {
       >
         <h1>Blog</h1>
       </div>
+      {/* Arrows */}
       <div className="flex mt-4 justify-end items-center mr-4 mb-4 py-6 px-5">
         <span className="text-chineseBlack mr-4 pr-4">Vidi druge programe</span>
         <div className="flex space-x-2 mr-8">
@@ -41,6 +68,7 @@ const Blog = () => {
               alt="grayArrow"
               width={100}
               height={100}
+              onClick={handlePrevBlogs}
             />
           </div>
           <div className="px-1">
@@ -50,40 +78,27 @@ const Blog = () => {
               alt="pinkArrow"
               width={100}
               height={100}
+              onClick={handleNextBlogs}
             />
           </div>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 py-4 gap-7 px-6">
-        {blogData.map((blog) => (
+        {currentBlogs.map((blog: any) => (
           <BlogCard
-            key={blog.id}
-            imageUrl={blog.imageUrl}
-            title={blog.title}
-            description={blog.description}
-            tag={blog.tag}
+            key={blog.data.id}
+            imageUrl={blog.data.imageURL}
+            title={blog.data.title}
+            description={blog.data.description}
+            date={blog.data.date}
           />
         ))}
       </div>
       {/* Pagination */}
       <div className="flex justify-center mt-4">
-        <button
-          onClick={goToPrevSet}
-          className="h-8 w-8 mr-2 text-gray-500 hover:text-gray-700"
-          disabled={startIndex === 0}
-        >
-          &lt;
-        </button>
         <span className="text-chineseBlack mr-1 mt-1">
           {currentPage}/{totalPages}
         </span>
-        <button
-          onClick={goToNextSet}
-          className="h-8 w-8 ml-2 text-gray-500 hover:text-gray-700"
-          disabled={startIndex + 3 >= blogData.length}
-        >
-          &gt;
-        </button>
       </div>
     </div>
   );

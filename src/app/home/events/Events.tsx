@@ -1,11 +1,56 @@
 "use client";
-import { useState } from "react";
-import EventCard from "./EventCard";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-// constants
-import { dummyData } from "./data/dummyData";
+// firebase
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/app/FirebaseConfig";
+// components
+import EventCard from "./EventCard";
 
 const Events = () => {
+  const [startIndex, setStartIndex] = useState(0);
+  const [events, setEvents] = useState([]);
+
+  // get events from firestore
+  const getEvents = () => {
+    const eventsCollectionRef = collection(db, "event");
+
+    getDocs(eventsCollectionRef)
+      .then((response) => {
+        const eventData: any = response.docs.map((doc) => ({
+          data: doc.data(),
+          id: doc.id,
+        }));
+        setEvents(eventData);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  useEffect(() => {
+    getEvents();
+  }, []);
+
+  useEffect(() => {
+    console.log("svi dogadjaji: ", events);
+  }, [events]);
+
+  {
+    /*pagination logic*/
+  }
+  const handleNextBlogs = () => {
+    setStartIndex((prevIndex) => prevIndex + 4);
+  };
+
+  const handlePrevBlogs = () => {
+    setStartIndex((prevIndex) => Math.max(prevIndex - 4, 0));
+  };
+
+  const currentEvents = events.slice(startIndex, startIndex + 4);
+  const currentPage = Math.floor(startIndex / 4) + 1;
+  const totalPages = Math.ceil(events.length / 4);
+
   return (
     <>
       <div className="flex items-center justify-center font-bold text-5xl py-8 px-6 mt-10 text-chineseBlack">
@@ -29,6 +74,7 @@ const Events = () => {
               alt="grayArrow"
               width={100}
               height={100}
+              onClick={handlePrevBlogs}
             />
           </div>
           <div className="px-3">
@@ -38,59 +84,31 @@ const Events = () => {
               alt="pinkArrow"
               width={100}
               height={100}
+              onClick={handleNextBlogs}
             />
           </div>
         </div>
       </div>
       <div className="flex flex-wrap mx-4 px-10 py-4">
-        <EventCard
-          imageSrc="/images/landing/events_1.png"
-          title="4.Decembar, 2023"
-          heading="Sve jednake i vidljive. Pridruzite nam se na ovom dogadjaju."
-          description={dummyData.description1}
-          locationIcon="/images/landing/pink_location.png"
-          clockIcon="/images/landing/pink_clock_icon.png"
-          time="13:00 - 14:30"
-          attenderIcon="/images/landing/pink_attender_icon.png"
-          calendarIcon="/images/landing/pink_calendar_icon.png"
-          attenders="13"
-        />
-        <EventCard
-          imageSrc="/images/landing/events_2.png"
-          title="29.Novembar, 2023"
-          heading="Panel diskusija: Femicid se ne dogadja slucajno!"
-          description={dummyData.description2}
-          locationIcon="/images/landing/pink_location.png"
-          clockIcon="/images/landing/pink_clock_icon.png"
-          time="13:00 - 14:30"
-          attenderIcon="/images/landing/pink_attender_icon.png"
-          calendarIcon="/images/landing/pink_calendar_icon.png"
-          attenders="44"
-        />
-        <EventCard
-          imageSrc="/images/landing/events_3.png"
-          title="17. i  18.Novembar, 2023"
-          heading="Online radionica: Nasilje u vezamaa mladih."
-          description={dummyData.description3}
-          locationIcon="/images/landing/pink_location.png"
-          clockIcon="/images/landing/pink_clock_icon.png"
-          time="11:00"
-          attenderIcon="/images/landing/pink_attender_icon.png"
-          calendarIcon="/images/landing/pink_calendar_icon.png"
-          attenders="21"
-        />
-        <EventCard
-          imageSrc="/images/landing/events_4.png"
-          title="5.Novembar, 2023"
-          heading="Pravedan tretman žene žrtve nasilja u sistemu zaštite - Pravo i potreba."
-          description={dummyData.description4}
-          locationIcon="/images/landing/pink_location.png"
-          clockIcon="/images/landing/pink_clock_icon.png"
-          time="12:00 - 13:30"
-          attenderIcon="/images/landing/pink_attender_icon.png"
-          calendarIcon="/images/landing/pink_calendar_icon.png"
-          attenders="21"
-        />
+        {currentEvents.map((event: any) => (
+          <EventCard
+            key={event.id}
+            imageURL={event.data.imageURL}
+            title={event.data.title}
+            time={event.data.time}
+            description={event.data.description}
+            location={event.data.location}
+            locationIcon="/images/landing/pink_location.png"
+            clockIcon="/images/landing/pink_clock_icon.png"
+            calendarIcon="/images/landing/pink_calendar_icon.png"
+          />
+        ))}
+      </div>
+      {/* Pagination */}
+      <div className="flex justify-center mt-4">
+        <span className="text-chineseBlack mr-1 mt-1">
+          {currentPage}/{totalPages}
+        </span>
       </div>
     </>
   );

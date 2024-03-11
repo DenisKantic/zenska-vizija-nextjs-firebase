@@ -5,14 +5,14 @@ interface BlogCardProps {
   imageUrl: string | StaticImageData;
   title: string;
   description: string;
-  tag: string;
+  date: string;
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({
   imageUrl,
   title,
   description,
-  tag,
+  date,
 }) => {
   return (
     <div
@@ -21,7 +21,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
     >
       <div className="relative flex">
         <Image
-          className="object-cover w-full h-full"
+          className="object-cover w-[600px] h-[416px]"
           src={imageUrl}
           alt={title}
           width={600}
@@ -38,7 +38,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 {title}
               </span>
               <span className="text-[12px] text-lotion opacity-50 px-1 pb-0.5">
-                {tag}
+                {date}
               </span>
               <span className="text-white text-[14px] pl-1">{description}</span>
             </div>
