@@ -1,28 +1,26 @@
+"use client";
 import Image, { StaticImageData } from "next/image";
 
 interface EventCardProps {
-  imageSrc: string | StaticImageData;
+  imageURL: string | StaticImageData;
   title: string;
-  heading: string;
   locationIcon: string | StaticImageData;
+  location: string;
   clockIcon: string | StaticImageData;
   calendarIcon: string | StaticImageData;
   time: string;
-  attenderIcon: string | StaticImageData;
-  attenders: string;
   description: string;
 }
 
 const EventCard: React.FC<EventCardProps> = ({
-  imageSrc,
+  imageURL,
   title,
-  heading,
   locationIcon,
   clockIcon,
   time,
-  attenderIcon,
-  attenders,
   calendarIcon,
+  description,
+  location,
 }) => {
   return (
     <div className="sm:w-1/3 lg:w-1/2 p-4 flex justify-center">
@@ -42,7 +40,7 @@ const EventCard: React.FC<EventCardProps> = ({
                   height={20}
                 />
                 <span className="text-[12px] text-purplePizzazz">
-                  Atelje Ismet Mujezinovic
+                  {location}
                 </span>
               </div>
               <div
@@ -52,31 +50,17 @@ const EventCard: React.FC<EventCardProps> = ({
                 <Image src={clockIcon} alt="clock" width={20} height={20} />
                 <span className="text-[12px] text-purplePizzazz">{time}</span>
               </div>
-              <div
-                className="flex items-center gap-2 border-[1px] border-solid
-              rounded-[16px] border-purplePizzazz px-3 py-2"
-              >
-                <Image
-                  src={attenderIcon}
-                  alt="attender"
-                  width={20}
-                  height={20}
-                />
-                <span className="text-[12px] text-purplePizzazz">
-                  {attenders}
-                </span>
-              </div>
             </div>
             <div className="py-2">
               <p className="text-chineseBlack text-[26px] font-semibold">
-                {heading}
+                {description}
               </p>
             </div>
             <div className="flex items-center">
               <Image
                 src={calendarIcon}
                 alt="calendar"
-                className="pr-2"
+                className="pr-2 h-auto w-auto"
                 width={20}
                 height={20}
               />
@@ -86,11 +70,11 @@ const EventCard: React.FC<EventCardProps> = ({
             </div>
             <div className="flex mt-2">
               <Image
-                src={imageSrc}
+                src={imageURL}
                 alt={title}
-                className="w-full h-full object-cover"
-                width={600}
-                height={600}
+                className="w-[500px] h-[300px] object-cover"
+                width={500}
+                height={300}
               />
             </div>
           </div>
