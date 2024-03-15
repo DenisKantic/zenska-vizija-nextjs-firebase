@@ -6,7 +6,7 @@ import Post from './interface'
 import Image from 'next/image';
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
-
+import { useRouter } from 'next/navigation';
     async function fetchDataFirestore(){
         const listCollection = collection(db, "blog");
         const querySnapshot = await getDocs(query(listCollection, orderBy("title", "desc")))
@@ -16,6 +16,7 @@ import { FaEdit } from "react-icons/fa";
           const newList = doc.data();
           list.push({id: doc.id, ...newList})
         })
+
         return list;
     }
 
@@ -23,7 +24,7 @@ import { FaEdit } from "react-icons/fa";
     const [userData, setUserData] = useState<Post[]>([]);
     const [title, setTitle] = useState("");
     const [imageUrl, setImageUrl] = useState("")
-
+    const router = useRouter()
 
     useEffect(()=>{
         async function fetchData(){
@@ -48,6 +49,7 @@ import { FaEdit } from "react-icons/fa";
     <div className='grid items-center justify-center mt-10 w-full h-full grid-flow-row auto-cols-max
     xxs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-20'>
         {userData.map((data)=>(
+         
         <div className='flex flex-col justify-around bg-red-100 mt-10' key={data.id}>
         <div className='h-full rounded-xl'>
             <Image src={data.imageURL} height={50} width={50}
@@ -71,7 +73,7 @@ import { FaEdit } from "react-icons/fa";
 
               <button className='w-[50%] flex items-center justify-center bg-blue-200 py-3 cursor-pointer
               hover:bg-blue-400' type='button'
-                onClick={()=>deleteFromDatabase(data.id)}
+                onClick={()=> router.push(`/dashboard/editBlogPost/${data.id}`)}
               ><FaEdit /></button>
           </div>
           </div>
