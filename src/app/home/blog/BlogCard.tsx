@@ -1,7 +1,9 @@
 "use client";
 import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 
 interface BlogCardProps {
+  blogId: number,
   imageUrl: string | StaticImageData;
   title: string;
   description: string;
@@ -9,11 +11,14 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({
+  blogId,
   imageUrl,
   title,
   description,
   date,
 }) => {
+
+  console.log("Im from card " + typeof blogId)
   return (
     <div
       className="mx-auto overflow-hidden bg-white rounded-[16px] shadow-lg 
@@ -44,9 +49,11 @@ const BlogCard: React.FC<BlogCardProps> = ({
             </div>
 
             <div className="flex items-end">
+              <Link href={`/blogs/${blogId}`}>
               <button className="hover:text-white text-purplePizzazz font-bold py-2 px-2 rounded focus:outline-none">
                 Pročitaj
               </button>
+              </Link>
             </div>
           </div>
         </div>

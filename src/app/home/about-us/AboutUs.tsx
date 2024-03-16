@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-
+import Link from "next/link";
 const AboutUs = () => {
   return (
     <section>
@@ -56,6 +56,7 @@ const AboutUs = () => {
             </p>
           </div>
           <div className="flex justify-center mt-2">
+            <Link href='/about_us'>
             <button
               className="inline-flex items-center justify-center text-white bg-purplePizzazz 
 							border-0 py-2 px-6 focus:outline-none hover:text-purplePizzazz hover:bg-chineseBlackLight 
@@ -63,6 +64,7 @@ const AboutUs = () => {
             >
               Pročitaj više
             </button>
+            </Link>
           </div>
         </div>
       </div>

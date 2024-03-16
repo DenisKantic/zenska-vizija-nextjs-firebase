@@ -6,7 +6,7 @@ import { imageList } from "./data/dummyData";
 const Gallery = () => {
   return (
     <>
-      <div className="bg-crayola flex flex-col items-center">
+      <div id="gallery" className="bg-crayola flex flex-col items-center">
         <div className="py-8 mt-6">
           <h3 className="text-center font-bold text-lotion text-5xl xl:text-6xl mt-8">
             Galerija

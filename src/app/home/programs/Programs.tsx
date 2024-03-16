@@ -4,7 +4,7 @@ import CardSlider from "./CardSlider";
 const Programs = () => {
   return (
     <>
-      <div
+      <div id="programs"
         className="flex items-center justify-center font-bold text-5xl 
       pt-10 pb-4 px-6 mb-4 mt-10 text-chineseBlack"
       >
