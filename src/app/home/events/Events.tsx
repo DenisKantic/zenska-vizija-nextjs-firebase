@@ -53,20 +53,20 @@ const Events = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center font-bold text-5xl py-8 px-6 mt-10 text-chineseBlack">
+      <div id="events" className="flex items-center justify-center font-bold text-5xl py-8 px-6 mt-10 text-chineseBlack">
         <h1>Skorašnji Događaji</h1>
       </div>
-      <div className="flex items-center justify-center text-chineseBlack opacity-80 text-xl pt-5 pb-7 my-3">
+      <div className="flex items-center justify-center text-chineseBlack opacity-80 text-xl pt-5 pb-7 px-6 my-3">
         <p>
           Vrlo često organizujemo događaje na razne teme, jer brinemo o našim
           članicama
         </p>
       </div>
-      <div className="flex mt-4 justify-end items-center mr-4 mb-2 py-4 px-5">
+      <div className="flex mt-4 flex-wrap  justify-end items-center mr-4 mb-2 py-4 px-5">
         <span className="text-chineseBlack mr-4 pr-4">
           Vidi starije događaje
         </span>
-        <div className="flex space-x-2 mr-8">
+        <div className="flex flex-wrap space-x-2 mr-8">
           <div className="px-2">
             <Image
               className="hover:text-purplePizzazz h-full w-full"
