@@ -16,7 +16,6 @@ const EditBlogPost = () => {
   const [title,setTitle] = useState("");
   const [option, setOption] = useState("blog");
   const [text, setText] = useState("");
-  const [event, setEvent] = useState(false);
   const [date, setDate] = useState("");
   const [image,setImage] = useState<File | null>(null);
   const [location, setLocation] = useState("");
@@ -77,17 +76,6 @@ const EditBlogPost = () => {
 }
 
 
-const handleEventBtn = () =>{
-  setOption("event");
-  setEvent(true);
-}
-
-const handleBlogBtn = () =>{
-  setOption("blog");
-  setEvent(false);
-  console.log(option)
-}
-
 const editPostData = async (title: any, description: any, option: any, date: any, time: any, location: any, imageUrl: string) => {
   const docRef = doc(db, "event", String(params.eventId));
 
@@ -116,12 +104,15 @@ useEffect(()=> {
     try {
       const docRef = doc(db, "event",  String(params.eventId)); // Assuming params.blogId holds the ID of the blog post
       const docSnap = await getDoc(docRef);
+    
       if (docSnap.exists()) {
         const data = docSnap.data();
         setText(data.description);
         setImageURL(data.imageURL);
         setTitle(data.title);
         setOption(data.type);
+        setLocation(data.location)
+        setTime(data.time)
       } else {
         console.log("No such document exists!");
       }
@@ -140,7 +131,7 @@ useEffect(()=> {
       <form onSubmit={handleSubmit}  className='flex flex-col justify-start items-start mt-10 min-h-screen'>
 
         <p className='text-xl'>Ubacite naslovnu sliku</p>
-        <div className='w-1/3'> 
+        <div className='w-32'> 
           <Image className='w-full' src={imageURL} width={800} height={800} alt="image upload"/>
         </div>
         <label className='mt-5 w-[50%] cursor-pointer rounded-full bg-white text-[#C86DD7] border-[2px] border-[#F93EDF]
@@ -161,54 +152,34 @@ useEffect(()=> {
         required 
         placeholder='Unesite Vaš naslov' 
         value={title}
-        className='w-[50%] mt-5 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
+        className='w-[50%] mt-5 text-[#C86DD7] text-xl rounded-full outline-none
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
         xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3'
         onChange={(e)=>setTitle(e.target.value)}
         />
         <br />
-
-          <p className='mb-4 text-xl'>Izaberite opciju:</p>
-            <div className='flex justify-center items-center mb-5'>
-              <button type='button' 
-              className='px-8 bg-[#F93EDF] text-white border-[2px] border-[#F93EDF] rounded-full py-1 
-                       hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
-                       xxs:text-sm sm:text-lg'
-                       onClick={()=>handleBlogBtn()}>
-                        Blog
-             </button>
-
-              <button type='button' className='px-8 bg-[#F93EDF] ml-5 text-white  border-[2px] border-[#F93EDF] rounded-full py-1
-                       hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
-                       xxs:text-sm sm:text-lg'
-                       onClick={()=>handleEventBtn()}
-                       >
-                        Događaj
-              </button>
-            </div>
-
-            <div className={event ? 'w-full block' : "hidden"}>
+            <div className='w-full'>
               <p className='text-xl'>Izaberite datum dogadjaja</p>
-              <input type="date" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
+              <input type="date" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
               over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
               onChange={formatDate}/>
             </div>
-
-
-            <div className={event ? 'w-full block' : "hidden"}>
+            <div className='w-full'>
               <p className='text-xl'>Mjesto odvijanja događaja</p>
               <input 
               type="text"
               placeholder='Upišite ovdje'
-              className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
+              className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
               over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
+              value={location}
               onChange={(e)=>setLocation(e.target.value)}/>
             </div>
 
-            <div className={event ? 'w-full block' : "hidden"}>
+            <div className='w-full'>
               <p className='text-xl'>Vrijeme održavanja</p>
-              <input type="text" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
+              <input type="text" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
               over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
+              value={time}
               onChange={(e)=>setTime(e.target.value)}/>
             </div>
 

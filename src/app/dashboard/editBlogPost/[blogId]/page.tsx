@@ -8,8 +8,10 @@ import {ref, uploadBytes, uploadBytesResumable, getDownloadURL} from "firebase/s
 import { TbCameraPlus } from "react-icons/tb";
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'
 const EditBlogPost = () => {
   const params = useParams();
+  const router = useRouter();
   const [title,setTitle] = useState("");
   const [option, setOption] = useState("blog");
   const [text, setText] = useState("");
@@ -22,7 +24,7 @@ const EditBlogPost = () => {
   const [time,setTime] = useState("")
   const [imageURL, setImageURL] = useState("");
 
-
+  //Date formatter currently not needed for blogs
   const formatDate = (e:any) => {
     const rawDateValue = e.target.value;
     const parsedDate = new Date(rawDateValue);
@@ -52,31 +54,17 @@ const EditBlogPost = () => {
       console.log(`Upload is done`);
       const downloadURL = await getDownloadURL(storageRef)
       setImageURL(downloadURL)
-      const submit = createDataFirestore(title, text, option,formattedDate, location, time, downloadURL);    
+      const submit = await editPostData(title, text, option,formattedDate, location, time, downloadURL);
       console.log("sucessfully created new data");
-        }
+        } else {
+          const submit = await editPostData(title, text, option,formattedDate, location, time, imageURL);
+      }
       } catch (error){
         console.log("error in handleUploadImage", error)
       }
     }
 
 
-  async function createDataFirestore(title: any, description:any, type: any, date: any, location: any, time: any, imageURL: string){
-    try{
-      const docRef = await addDoc(collection(db, option),{
-        title: title,
-        description: description,
-        type: type,
-        date: date,
-        time: time,
-        location: location,
-        imageURL: imageURL
-      })
-      console.log("document written with ID", docRef.id);
-    } catch(error){
-      console.log("error, something bad in createDataFirestore " ,error);
-    }
-  }
 
   const handleSubmit = async (e: any) =>{
     e.preventDefault();
@@ -89,16 +77,28 @@ const EditBlogPost = () => {
 }
 
 
-const handleEventBtn = () =>{
-  setOption("event");
-  setEvent(true);
+const editPostData = async (title: any, description: any, option: any, date: any, time: any, location: any, imageUrl: string) => {
+  const docRef = doc(db, "blog", String(params.blogId));
+
+  try {
+    const docUpdate = await updateDoc(docRef, {
+      title: title,
+      description: description,
+      type: option,
+      date: date,
+      time: time,
+      location: location,
+      imageURL: imageUrl
+    });
+    console.log("Hello" + docUpdate)
+    console.log('Success updating blog data', docUpdate); // Log docUpdate here
+    router.push('/dashboard/blog');
+  } catch (error) {
+    console.error("Error updating blog data: ", error);
+  }
+  
 }
 
-const handleBlogBtn = () =>{
-  setOption("blog");
-  setEvent(false);
-  console.log(option)
-}
 
 useEffect(()=> {
   const getBlogData = async () => {
@@ -111,6 +111,8 @@ useEffect(()=> {
         setImageURL(data.imageURL);
         setTitle(data.title);
         setOption(data.type);
+        setLocation(data.location)
+        setTime(data.time)
       } else {
         console.log("No such document exists!");
       }
@@ -129,7 +131,7 @@ useEffect(()=> {
       <form onSubmit={handleSubmit}  className='flex flex-col justify-start items-start mt-10 min-h-screen'>
 
         <p className='text-xl'>Ubacite naslovnu sliku</p>
-        <div className='w-1/3'> 
+        <div className='w-32'> 
           <Image className='w-full' src={imageURL} width={800} height={800} alt="image upload"/>
         </div>
         <label className='mt-5 w-[50%] cursor-pointer rounded-full bg-white text-[#C86DD7] border-[2px] border-[#F93EDF]
@@ -138,7 +140,6 @@ useEffect(()=> {
         <input 
         type="file" 
         accept='image/png, image/jpg, image/jpeg'
-        required  
         onChange={(e:any)=> uploadImage(e)}
         className='hidden'
         />
@@ -151,56 +152,12 @@ useEffect(()=> {
         required 
         placeholder='Unesite Vaš naslov' 
         value={title}
-        className='w-[50%] mt-5 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
+        className='w-[50%] mt-5 text-[#C86DD7] text-xl rounded-full outline-none
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
         xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3'
         onChange={(e)=>setTitle(e.target.value)}
         />
         <br />
-
-          <p className='mb-4 text-xl'>Izaberite opciju:</p>
-            <div className='flex justify-center items-center mb-5'>
-              <button type='button' 
-              className='px-8 bg-[#F93EDF] text-white border-[2px] border-[#F93EDF] rounded-full py-1 
-                       hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
-                       xxs:text-sm sm:text-lg'
-                       onClick={()=>handleBlogBtn()}>
-                        Blog
-             </button>
-
-              <button type='button' className='px-8 bg-[#F93EDF] ml-5 text-white  border-[2px] border-[#F93EDF] rounded-full py-1
-                       hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
-                       xxs:text-sm sm:text-lg'
-                       onClick={()=>handleEventBtn()}
-                       >
-                        Događaj
-              </button>
-            </div>
-
-            <div className={event ? 'w-full block' : "hidden"}>
-              <p className='text-xl'>Izaberite datum dogadjaja</p>
-              <input type="date" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
-              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
-              onChange={formatDate}/>
-            </div>
-
-
-            <div className={event ? 'w-full block' : "hidden"}>
-              <p className='text-xl'>Mjesto odvijanja događaja</p>
-              <input 
-              type="text"
-              placeholder='Upišite ovdje'
-              className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
-              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
-              onChange={(e)=>setLocation(e.target.value)}/>
-            </div>
-
-            <div className={event ? 'w-full block' : "hidden"}>
-              <p className='text-xl'>Vrijeme održavanja</p>
-              <input type="text" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
-              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
-              onChange={(e)=>setTime(e.target.value)}/>
-            </div>
 
         <p className='text-xl mb-5 mt-5'>Tekst objave</p>
         
@@ -217,7 +174,7 @@ useEffect(()=> {
                        xxs:text-sm sm:text-lg'
                        type='submit'
                        >
-                        Kreiraj objavu
+                        Izmjeni objavu
               </button>
 
       </form>

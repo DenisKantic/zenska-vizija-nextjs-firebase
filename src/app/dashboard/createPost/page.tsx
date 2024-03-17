@@ -17,8 +17,9 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { TbCameraPlus } from "react-icons/tb";
-
+import { useRouter } from 'next/navigation'
 const createPost = () => {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [option, setOption] = useState("blog");
   const [text, setText] = useState("");
@@ -30,8 +31,7 @@ const createPost = () => {
   const [error, setError] = useState(false);
   const [time, setTime] = useState("");
   const [imageURL, setImageURL] = useState("");
-  console.log(option)
-  console.log(title)
+  
   const formatDate = (e: any) => {
     const rawDateValue = e.target.value;
     const parsedDate = new Date(rawDateValue);
@@ -101,6 +101,7 @@ const createPost = () => {
       });
       console.log(option)
       console.log("document written with ID", docRef.id);
+      router.push(`/dashboard/${option}`)
     } catch (error) {
       console.log("error, something bad in createDataFirestore ", error);
     }
@@ -160,7 +161,7 @@ const createPost = () => {
           type="text"
           required
           placeholder="Unesite Vaš naslov"
-          className="w-[50%] mt-5 text-[#C86DD7] text-xl rounded-full outline-none cursor-pointer
+          className="w-[50%] mt-5 text-[#C86DD7] text-xl rounded-full outline-none
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
         xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3"
           onChange={(e) => setTitle(e.target.value)}
@@ -206,7 +207,7 @@ const createPost = () => {
           <input
             type="text"
             placeholder="Upišite ovdje"
-            className="w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
+            className="w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
               over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]"
             onChange={(e) => setLocation(e.target.value)}
           />
@@ -216,7 +217,7 @@ const createPost = () => {
           <p className="text-xl">Vrijeme održavanja</p>
           <input
             type="text"
-            className="w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
+            className="w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
               over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]"
             onChange={(e) => setTime(e.target.value)}
           />
