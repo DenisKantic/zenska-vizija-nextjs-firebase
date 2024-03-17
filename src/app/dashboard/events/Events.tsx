@@ -6,7 +6,7 @@ import Event from './interface'
 import Image from 'next/image';
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
-
+import { useRouter } from 'next/navigation';
 
     async function fetchDataFirestore(){
         const listCollection = collection(db, "event");
@@ -34,6 +34,8 @@ import { FaEdit } from "react-icons/fa";
     const UserDataFetcher: React.FC = () => {
     const [userData, setUserData] = useState<Event[]>([]);
     const [title, setTitle] = useState("");
+    const router = useRouter()
+
 
 
     useEffect(()=>{
@@ -73,7 +75,7 @@ import { FaEdit } from "react-icons/fa";
 
                   <button className='w-[50%] flex items-center justify-center bg-blue-200 py-3 cursor-pointer
                   hover:bg-blue-400' type='button'
-                    onClick={()=>deleteFromDatabase(data.id)}
+                  onClick={()=> router.push(`/dashboard/editEventPost/${data.id}`)}
                   ><FaEdit /></button>
               </div>
 
