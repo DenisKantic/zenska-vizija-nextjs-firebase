@@ -30,7 +30,8 @@ const createPost = () => {
   const [error, setError] = useState(false);
   const [time, setTime] = useState("");
   const [imageURL, setImageURL] = useState("");
-
+  console.log(option)
+  console.log(title)
   const formatDate = (e: any) => {
     const rawDateValue = e.target.value;
     const parsedDate = new Date(rawDateValue);
@@ -98,6 +99,7 @@ const createPost = () => {
         location: location,
         imageURL: imageURL,
       });
+      console.log(option)
       console.log("document written with ID", docRef.id);
     } catch (error) {
       console.log("error, something bad in createDataFirestore ", error);
@@ -195,7 +197,7 @@ const createPost = () => {
             className="w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
               over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]"
             onChange={formatDate}
-            required
+            required={event && true}
           />
         </div>
 
