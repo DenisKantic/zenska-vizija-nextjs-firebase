@@ -1,17 +1,18 @@
 "use client"
 import React,{ChangeEvent, useState, useEffect} from 'react';
 import MyRichTextEditor from '../TextEditor';
-import { addDoc, collection, updateDoc, getFirestore, doc, getDoc } from 'firebase/firestore';
+import { addDoc, collection, updateDoc, getFirestore, doc, getDoc, } from 'firebase/firestore';
 import { db } from '@/app/FirebaseConfig';
 import {storage} from '@/app/FirebaseConfig'
 import {ref, uploadBytes, uploadBytesResumable, getDownloadURL} from "firebase/storage"
 import { TbCameraPlus } from "react-icons/tb";
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'
 
 const EditBlogPost = () => {
+  const router = useRouter();
   const params = useParams();
-  console.log(params.eventId)
   const [title,setTitle] = useState("");
   const [option, setOption] = useState("blog");
   const [text, setText] = useState("");
@@ -53,8 +54,10 @@ const EditBlogPost = () => {
       console.log(`Upload is done`);
       const downloadURL = await getDownloadURL(storageRef)
       setImageURL(downloadURL)
-      const submit = createDataFirestore(title, text, option,formattedDate, location, time, downloadURL);    
+      const submit = await editPostData(title, text, option,formattedDate, location, time, downloadURL);
       console.log("sucessfully created new data");
+        } else {
+          const submit = await editPostData(title, text, option,formattedDate, location, time, imageURL);
         }
       } catch (error){
         console.log("error in handleUploadImage", error)
@@ -62,22 +65,6 @@ const EditBlogPost = () => {
     }
 
 
-  async function createDataFirestore(title: any, description:any, type: any, date: any, location: any, time: any, imageURL: string){
-    try{
-      const docRef = await addDoc(collection(db, option),{
-        title: title,
-        description: description,
-        type: type,
-        date: date,
-        time: time,
-        location: location,
-        imageURL: imageURL
-      })
-      console.log("document written with ID", docRef.id);
-    } catch(error){
-      console.log("error, something bad in createDataFirestore " ,error);
-    }
-  }
 
   const handleSubmit = async (e: any) =>{
     e.preventDefault();
@@ -99,6 +86,28 @@ const handleBlogBtn = () =>{
   setOption("blog");
   setEvent(false);
   console.log(option)
+}
+
+const editPostData = async (title: any, description: any, option: any, date: any, time: any, location: any, imageUrl: string) => {
+  const docRef = doc(db, "event", String(params.eventId));
+
+  try {
+    const docUpdate = await updateDoc(docRef, {
+      title: title,
+      description: description,
+      type: option,
+      date: date,
+      time: time,
+      location: location,
+      imageURL: imageUrl
+    });
+
+    console.log('Success updating blog data', docUpdate); // Log docUpdate here
+    router.push('/dashboard/events');
+  } catch (error) {
+    console.error("Error updating blog data: ", error);
+  }
+  
 }
 
 
@@ -139,8 +148,7 @@ useEffect(()=> {
          {image==null ? (<TbCameraPlus className='mx-auto' />) : image.name}
         <input 
         type="file" 
-        accept='image/png, image/jpg, image/jpeg'
-        required  
+        accept='image/png, image/jpg, image/jpeg' 
         onChange={(e:any)=> uploadImage(e)}
         className='hidden'
         />
@@ -219,7 +227,7 @@ useEffect(()=> {
                        xxs:text-sm sm:text-lg'
                        type='submit'
                        >
-                        Kreiraj objavu
+                        Izmjeni objavu
               </button>
 
       </form>
