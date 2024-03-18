@@ -10,7 +10,7 @@ import BlogCard from "./BlogCard";
 const Blog = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [blogs, setBlogs] = useState([]);
-
+ 
   // get blogs from firestore
   const getBlogs = () => {
     const blogsCollectionRef = collection(db, "blog");
@@ -86,8 +86,8 @@ const Blog = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 py-4 gap-7 px-6">
         {currentBlogs.map((blog: any) => (
           <BlogCard
-            key={blog.data.id}
-            blogId={blog.data.id}
+            key={blog.id}
+            blogId={blog.id}
             imageUrl={blog.data.imageURL}
             title={blog.data.title}
             description={blog.data.description}

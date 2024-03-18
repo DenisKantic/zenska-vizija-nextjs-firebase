@@ -1,23 +1,54 @@
 'use client'
-import React from 'react';
-import { blogData } from '../home/blog/data/dummyData';
-import Link from 'next/link';
-import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from 'react';
+import {  collection, doc, getDoc, query, getDocs, orderBy } from 'firebase/firestore';
+import { db } from "@/app/FirebaseConfig";
 
-export default function BlogNavigation() {
-  const pathname = usePathname();
-  const blogs = blogData;
+async function fetchDataFirestore() {
+  const listCollection = collection(db, "blog");
+  const querySnapshot = await getDocs(query(listCollection, orderBy("title", "desc")));
+  const list = [];
+
+  querySnapshot.forEach((doc) => {
+    const newList = doc.data();
+    list.push({ id: doc.id, ...newList });
+  });
+
+  return list;
+}
+
+async function fetchBlog(id: any) {
+  const docRef = doc(db, "blog",  id); // Assuming params.blogId holds the ID of the blog post
+  const docSnap = await getDoc(docRef);
+  const blog = docSnap.data();
+  
+  return blog;
+}
+
+export default function BlogNavigation({blogId, setBlog, blog}:any) {
+  
+  const [blogs, setBlogs] = useState([]);
+  
+  const settingBlog = async (id: any) => {
+    const blog = await fetchBlog(id);
+    setBlog(blog);
+  }
+
+  useEffect(() => {
+    fetchDataFirestore().then(setBlogs).catch(error => {
+      console.error("Error fetching blogs:", error);
+    });
+  }, []);
 
   return (
     <div className=''>
       <h3 className='text-slate-700 text-2xl font-semibold mt-16 mb-8 px-6'>Istaknuti članci</h3>
       {
-        blogs.slice(0, 5).map(blog => (
-          <Link key={blog.id} href={`/blogs/${blog.id}`}>
-            <div className={`${pathname === `/blogs/${blog.id}` ? "bg-[#F93EDF] text-white" : ""} hover:bg-[#F93EDF] hover:text-white cursor-pointer px-6 py-4 rounded-xl mb-2`}>
-              <p>{blog.title}</p>
+        blogs.slice(0, 5).map((listItem) => (
+         
+            <div key={listItem.id} onClick={() => settingBlog(listItem.id)} className={`${listItem.title === blog.title ? 'bg-[#F93EDF] text-white' : ''} hover:bg-[#F93EDF] hover:text-white cursor-pointer px-6 py-4 rounded-xl mb-2`}>
+              <p>{listItem.title}</p>
             </div>
-          </Link>
+          
         ))
       }
     </div>
