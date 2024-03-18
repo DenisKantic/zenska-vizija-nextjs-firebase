@@ -25,7 +25,7 @@ import { useRouter } from 'next/navigation';
     const [title, setTitle] = useState("");
     const [imageUrl, setImageUrl] = useState("")
     const router = useRouter()
-
+  
     useEffect(()=>{
         async function fetchData(){
           const data: Post[] = await fetchDataFirestore();

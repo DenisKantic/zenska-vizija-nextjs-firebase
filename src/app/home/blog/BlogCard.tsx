@@ -18,7 +18,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   date,
 }) => {
 
-  console.log("Im from card " + typeof blogId)
+  console.log("Im from card " + blogId)
   return (
     <div
       className="mx-auto overflow-hidden bg-white rounded-[16px] shadow-lg 
