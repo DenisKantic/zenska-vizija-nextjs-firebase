@@ -11,19 +11,33 @@ import ImageSection from "./image-section/ImageSection";
 import GreetingBlock from "./greeting-block/GreetingBlock";
 import Contact from "./contact/Contact";
 import Footer from "./footer/Footer";
+import Navbar from "./navigation/Navbar";
 
 const LandingPage = () => {
   return (
     <div className="bg-brightGray">
+      <Navbar />
       <HeroSection />
-      <AboutUs />
-      <Programs />
-      <Events />
-      <Blog />
-      <Gallery />
+      <section id="about-us">
+        <AboutUs />
+      </section>
+      <section id="programs">
+        <Programs />
+      </section>
+      <section id="events">
+        <Events />
+      </section>
+      <section id="blogs">
+        <Blog />
+      </section>
+      <section id="gallery">
+        <Gallery />
+      </section>
       <ImageSection />
       <GreetingBlock />
-      <Contact />
+      <section id="contact">
+        <Contact />
+      </section>
       <Footer />
     </div>
   );
