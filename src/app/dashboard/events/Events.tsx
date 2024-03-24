@@ -7,36 +7,48 @@ import Image from 'next/image';
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
-
-    async function fetchDataFirestore(){
-        const listCollection = collection(db, "event");
-        const querySnapshot = await getDocs(query(listCollection, orderBy("title", "desc")))
-        const list:any = [];
+import ReactPaginate from 'react-paginate'
+import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
+import { IconContext } from "react-icons";
+async function fetchDataFirestore(){
+  const listCollection = collection(db, "event");
+  const querySnapshot = await getDocs(query(listCollection, orderBy("title", "desc")))
+  const list:any = [];
       
-        querySnapshot.forEach((doc)=>{
-          const newList = doc.data();
-          list.push({id: doc.id, ...newList})
-        })
-        return list;
-    }
+  querySnapshot.forEach((doc)=>{
+    const newList = doc.data();
+    list.push({id: doc.id, ...newList})
+  })
+  return list;
+}
 
-    async function deleteFromDatabase(id:any){
-      try{
-        await deleteDoc(doc(db, "event", id));
-        window.location.reload()
-        return id;
-      } catch (error){
-        alert("error")
-        console.log(error);
-      }
-    }
+async function deleteFromDatabase(id:any){
+  try{
+    await deleteDoc(doc(db, "event", id));
+    window.location.reload()
+    return id;
+  } catch (error){
+    alert("error")
+    console.log(error);
+  }
+}
 
-    const UserDataFetcher: React.FC = () => {
-    const [userData, setUserData] = useState<Event[]>([]);
-    const [title, setTitle] = useState("");
-    const router = useRouter()
+const UserDataFetcher: React.FC = () => {
+  const [userData, setUserData] = useState<Event[]>([]);
+  const [title, setTitle] = useState("");
+  const router = useRouter()
+  const items = userData;
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 6;
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = items.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(items.length / itemsPerPage);
 
-
+  
+  const handlePageClick = (event: any) => {
+    const newOffset = (event.selected * itemsPerPage) % items.length;
+    setItemOffset(newOffset);
+  };
 
     useEffect(()=>{
         async function fetchData(){
@@ -47,10 +59,10 @@ import { useRouter } from 'next/navigation';
     },[])
 
   return (
-
-    <div className='grid items-center justify-center mt-10 w-full h-full grid-flow-row auto-cols-max
+    <>
+    <div className='grid justify-center mt-10 w-full h-full grid-flow-row auto-cols-max
     xxs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-20'>
-        {userData.map((data)=>(
+        {currentItems.map((data)=>(
         <div className='flex flex-col justify-around bg-red-100 mt-10' key={data.id}>
             <div className='h-full rounded-xl'>
                 <Image src={data.imageURL} height={50} width={50}
@@ -82,6 +94,29 @@ import { useRouter } from 'next/navigation';
         </div>
         ))}
     </div>
+    {
+      items.length >= itemsPerPage ? <ReactPaginate
+      breakLabel="..."
+      pageClassName={"page-item"}
+    activeClassName={"active"}
+      onPageChange={handlePageClick}
+      pageRangeDisplayed={5}
+      pageCount={pageCount}
+      previousLabel={
+        <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
+          <AiFillLeftCircle />
+        </IconContext.Provider>
+      }
+      nextLabel={
+        <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
+          <AiFillRightCircle />
+        </IconContext.Provider>
+      }
+      containerClassName={"pagination"}
+      renderOnZeroPageCount={null}
+    /> : null
+    }
+  </>
   )
  }
 
