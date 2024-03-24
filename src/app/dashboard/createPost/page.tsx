@@ -101,7 +101,7 @@ const createPost = () => {
       });
       console.log(option)
       console.log("document written with ID", docRef.id);
-      router.push(`/dashboard/${option}`)
+      router.push(`/dashboard/${option}s`)
     } catch (error) {
       console.log("error, something bad in createDataFirestore ", error);
     }
