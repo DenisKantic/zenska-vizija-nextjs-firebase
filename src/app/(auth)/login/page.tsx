@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/AuthContext";
 
@@ -125,13 +126,13 @@ const Login = () => {
         )}
         <br />
 
-        <a
-          href="#"
+        <Link
+          href="/forgot-password"
           className="text-[#C86DD7] italic underline
                   xxs:text-sm xxs:m-0 sm:text-lg sm:m-3"
         >
           Zaboravili ste šifru?
-        </a>
+        </Link>
 
         <div className="w-full mt-5 p-3 flex flex-row justify-between items-center">
           <button
