@@ -1,11 +1,11 @@
-'use client'
+"use client"
 import { useState, useEffect } from 'react';
-import { blogData } from '../../home/blog/data/dummyData'
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import BlogNavigation from '../blogNavigation';
-import { addDoc, collection, updateDoc, getFirestore, doc, getDoc, query } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from "@/app/FirebaseConfig";
 import { useParams } from 'next/navigation';
+
 
 async function fetchDataFirestore(blogId: string) {
     const docRef = doc(db, "blog",  blogId);

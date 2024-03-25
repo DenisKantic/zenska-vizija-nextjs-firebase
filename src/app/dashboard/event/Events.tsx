@@ -10,6 +10,9 @@ import { useRouter } from 'next/navigation';
 import ReactPaginate from 'react-paginate'
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import { IconContext } from "react-icons";
+import Spinner from '@/app/Spinner';
+
+
 async function fetchDataFirestore(){
   const listCollection = collection(db, "event");
   const querySnapshot = await getDocs(query(listCollection, orderBy("title", "desc")))
@@ -58,11 +61,23 @@ const UserDataFetcher: React.FC = () => {
         fetchData();
     },[])
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000); // Display spinner for 2 seconds
+  
+      return () => clearTimeout(timer);
+    }, []);
+  
+
   return (
     <>
-    <div className='grid justify-center mt-10 w-full h-full grid-flow-row auto-cols-max
+    {isLoading ? (<Spinner />) : 
+    (<div className='grid justify-center mt-10 w-full h-full grid-flow-row auto-cols-max
     xxs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-20'>
-        {currentItems.map((data)=>(
+      {currentItems.map((data)=>(
         <div className='flex flex-col justify-around bg-red-100 mt-10' key={data.id}>
             <div className='h-full rounded-xl'>
                 <Image src={data.imageURL} height={50} width={50}
@@ -92,8 +107,8 @@ const UserDataFetcher: React.FC = () => {
               </div>
 
         </div>
-        ))}
-    </div>
+              ))}
+    </div> )}
     {
       items.length >= itemsPerPage ? <ReactPaginate
       breakLabel="..."
@@ -115,7 +130,7 @@ const UserDataFetcher: React.FC = () => {
       containerClassName={"pagination"}
       renderOnZeroPageCount={null}
     /> : null
-    }
+  }
   </>
   )
  }

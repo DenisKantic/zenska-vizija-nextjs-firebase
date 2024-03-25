@@ -3,22 +3,20 @@ import React, { ChangeEvent, useState } from "react";
 import MyRichTextEditor from "./TextEditor";
 import {
   addDoc,
-  collection,
-  updateDoc,
-  getFirestore,
-  doc,
+  collection
 } from "firebase/firestore";
 import { db } from "@/app/FirebaseConfig";
 import { storage } from "@/app/FirebaseConfig";
 import {
   ref,
   uploadBytes,
-  uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
 import { TbCameraPlus } from "react-icons/tb";
 import { useRouter } from 'next/navigation'
-const createPost = () => {
+
+
+const CreatePost = () => {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [option, setOption] = useState("blog");
@@ -30,7 +28,6 @@ const createPost = () => {
   const [formattedDate, setFormattedDate] = useState("");
   const [error, setError] = useState(false);
   const [time, setTime] = useState("");
-  const [imageURL, setImageURL] = useState("");
   
   const formatDate = (e: any) => {
     const rawDateValue = e.target.value;
@@ -101,7 +98,7 @@ const createPost = () => {
       });
       console.log(option)
       console.log("document written with ID", docRef.id);
-      router.push(`/dashboard/${option}s`)
+      router.push(`/dashboard/${option}`)
     } catch (error) {
       console.log("error, something bad in createDataFirestore ", error);
     }
@@ -246,4 +243,4 @@ const createPost = () => {
   );
 };
 
-export default createPost;
+export default CreatePost;

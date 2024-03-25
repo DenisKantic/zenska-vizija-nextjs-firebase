@@ -1,14 +1,17 @@
 "use client"
 import React,{ChangeEvent, useState, useEffect} from 'react';
 import MyRichTextEditor from '../TextEditor';
-import { addDoc, collection, updateDoc, getFirestore, doc, getDoc, query } from 'firebase/firestore';
+import { updateDoc,doc, getDoc } from 'firebase/firestore';
 import { db } from '@/app/FirebaseConfig';
 import {storage} from '@/app/FirebaseConfig'
-import {ref, uploadBytes, uploadBytesResumable, getDownloadURL} from "firebase/storage"
+import {ref, uploadBytes, getDownloadURL} from "firebase/storage"
 import { TbCameraPlus } from "react-icons/tb";
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation'
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+import Link from 'next/link';
+
 const EditBlogPost = () => {
   const params = useParams();
   const router = useRouter();
@@ -23,6 +26,7 @@ const EditBlogPost = () => {
   const [error, setError] = useState(false);
   const [time,setTime] = useState("")
   const [imageURL, setImageURL] = useState("");
+
 
   //Date formatter currently not needed for blogs
   const formatDate = (e:any) => {
@@ -126,11 +130,14 @@ useEffect(()=> {
 
   return (
     <div className='w-full h-screen overflow-y-scroll p-10'>
-      <h1 className='text-4xl'>Kreiraj objavu</h1>
+      <Link href="/dashboard/blog" className='cursor-pointer text-4xl'>
+        <FaArrowAltCircleLeft className='text-[#F93EDF]' />
+        </Link>
+      <h1 className='text-4xl'>Uredi objavu</h1>
 
       <form onSubmit={handleSubmit}  className='flex flex-col justify-start items-start mt-10 min-h-screen'>
 
-        <p className='text-xl'>Ubacite naslovnu sliku</p>
+        <p className='text-xl'>Promijenite naslovnu sliku</p>
         <div className='w-32'> 
           <Image className='w-full' src={imageURL} width={800} height={800} alt="image upload"/>
         </div>

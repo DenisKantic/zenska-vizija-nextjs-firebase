@@ -48,7 +48,7 @@ const AboutUs = () => {
           <div className="ml-1">
             <p className="mb-8">
               <span className="text-chineseBlack">
-                Udruženje "Ženska Vizija" je osnovano sa ciljem zaštite ženskih
+                Udruženje {"Ženska Vizija"} je osnovano sa ciljem zaštite ženskih
                 prava, zalaganje za jednakost i ravnopravnost žena u BIH. <br />
                 Pružamo podršku ženama da prevaziđu svoja najbolnija iskustva i
                 da ih osnažimo.
