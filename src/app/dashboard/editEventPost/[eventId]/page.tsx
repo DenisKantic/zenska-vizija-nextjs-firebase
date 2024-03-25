@@ -93,7 +93,7 @@ const editPostData = async (title: any, description: any, option: any, date: any
     });
 
     console.log('Success updating blog data', docUpdate); // Log docUpdate here
-    router.push('/dashboard/events');
+    router.push('/dashboard/event');
   } catch (error) {
     console.error("Error updating blog data: ", error);
   }
@@ -128,7 +128,7 @@ useEffect(()=> {
 
   return (
     <div className='w-full h-screen overflow-y-scroll p-10'>
-            <Link href="/dashboard/events" className='cursor-pointer text-4xl'>
+            <Link href="/dashboard/event" className='cursor-pointer text-4xl'>
                 <FaArrowAltCircleLeft className='text-[#F93EDF]' />
             </Link>
       <h1 className='text-4xl'>Uredite događaj</h1>
