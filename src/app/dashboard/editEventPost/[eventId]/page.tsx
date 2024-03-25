@@ -1,14 +1,16 @@
 "use client"
 import React,{ChangeEvent, useState, useEffect} from 'react';
 import MyRichTextEditor from '../TextEditor';
-import { addDoc, collection, updateDoc, getFirestore, doc, getDoc, } from 'firebase/firestore';
+import { updateDoc, doc, getDoc, } from 'firebase/firestore';
 import { db } from '@/app/FirebaseConfig';
 import {storage} from '@/app/FirebaseConfig'
-import {ref, uploadBytes, uploadBytesResumable, getDownloadURL} from "firebase/storage"
+import {ref, uploadBytes, getDownloadURL} from "firebase/storage"
 import { TbCameraPlus } from "react-icons/tb";
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation'
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+import Link from 'next/link';
 
 const EditBlogPost = () => {
   const router = useRouter();
@@ -126,11 +128,14 @@ useEffect(()=> {
 
   return (
     <div className='w-full h-screen overflow-y-scroll p-10'>
-      <h1 className='text-4xl'>Kreiraj objavu</h1>
+            <Link href="/dashboard/events" className='cursor-pointer text-4xl'>
+                <FaArrowAltCircleLeft className='text-[#F93EDF]' />
+            </Link>
+      <h1 className='text-4xl'>Uredite događaj</h1>
 
       <form onSubmit={handleSubmit}  className='flex flex-col justify-start items-start mt-10 min-h-screen'>
 
-        <p className='text-xl'>Ubacite naslovnu sliku</p>
+        <p className='text-xl'>Promijenite naslovnu sliku</p>
         <div className='w-32'> 
           <Image className='w-full' src={imageURL} width={800} height={800} alt="image upload"/>
         </div>
@@ -159,7 +164,7 @@ useEffect(()=> {
         />
         <br />
             <div className='w-full'>
-              <p className='text-xl'>Izaberite datum dogadjaja</p>
+              <p className='text-xl'>Uredite datum</p>
               <input type="date" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
               over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
               onChange={formatDate}/>

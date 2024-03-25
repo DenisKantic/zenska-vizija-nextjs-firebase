@@ -9,6 +9,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/app/AuthContext";
+import { FaHome } from "react-icons/fa";
 
 
 const Navbar = () => {
@@ -43,8 +44,14 @@ const Navbar = () => {
             </div>
 
             <div className={ nav ? 'flex flex-col justify-center items-center' : 'w-full'}>
-                <Link href='/dashboard/settings' 
+            <Link href='/' 
                 className='flex flex-row items-center justify-start text-xl cursor-pointer hover:text-red-400'>
+                    <FaHome />
+                    <p className={nav ? "hidden" : 'pl-10'}>Naslovna</p>
+                </Link>
+
+                <Link href='/dashboard/settings' 
+                className='flex flex-row items-center justify-start text-xl cursor-pointer hover:text-red-400 pt-7'>
                     <FaRegUser /> 
                     <p className={nav ? "hidden" : 'pl-10'}>Postavke profila</p>
                 </Link>
@@ -59,7 +66,7 @@ const Navbar = () => {
                     <p className={nav ? "hidden" : 'pl-10'}>Moje objave</p>
                 </Link>
 
-                <Link href="/dashboard/events" className='flex flex-row items-center justify-start pt-7 text-xl cursor-pointer hover:text-red-400'>
+                <Link href="/dashboard/event" className='flex flex-row items-center justify-start pt-7 text-xl cursor-pointer hover:text-red-400'>
                     <FaFileAlt /> 
                     <p className={nav ? "hidden" : 'pl-10'}>Moji dogadjaji</p>
                 </Link>
