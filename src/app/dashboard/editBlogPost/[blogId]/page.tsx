@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation'
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import Link from 'next/link';
 
-
 const EditBlogPost = () => {
   const params = useParams();
   const router = useRouter();
@@ -27,6 +26,7 @@ const EditBlogPost = () => {
   const [error, setError] = useState(false);
   const [time,setTime] = useState("")
   const [imageURL, setImageURL] = useState("");
+
 
   //Date formatter currently not needed for blogs
   const formatDate = (e:any) => {

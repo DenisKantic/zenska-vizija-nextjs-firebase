@@ -3,7 +3,7 @@ import React,{useState,useEffect} from 'react'
 import UserDataFetcher from './Post';
 import Spinner from '@/app/Spinner';
 
-const fetchData = () => {
+const FetchData = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,4 +30,4 @@ const fetchData = () => {
   )
 }
 
-export default fetchData;
+export default FetchData;

@@ -7,7 +7,7 @@ export default function AboutUs() {
         <div className='my-16'>
             <p className='text-slate-700'>Naša misija</p>
             <p className='text-lg'>
-            Udruženje "Ženska Vizija" je osnovano sa ciljem zaštite ženskih prava,zalaganje za jednakost i ravnopravnost žena u BIH. 
+            Udruženje {"Ženska Vizija"} je osnovano sa ciljem zaštite ženskih prava,zalaganje za jednakost i ravnopravnost žena u BIH. 
             Pružamo podršku ženama da prevaziđu svoja najbolnija iskustva i da ih osnađimo.
             </p>
         </div>

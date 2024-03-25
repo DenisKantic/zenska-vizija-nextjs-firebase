@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
 
-
 export default function notFound(){
     return(
          <div className='bg-[#FEF1FD] h-screen w-full text-center flex flex-col justify-center items-center'>

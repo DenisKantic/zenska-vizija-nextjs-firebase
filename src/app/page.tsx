@@ -3,7 +3,7 @@ import React,{useEffect, useState} from 'react'
 import Home from './home/Home'
 import Spinner from './Spinner'
 
-const page = () => {
+const Page = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,6 +14,7 @@ const page = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <div>
       {isLoading ? (<Spinner />) : 
@@ -23,4 +24,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
