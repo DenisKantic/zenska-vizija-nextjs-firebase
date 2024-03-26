@@ -1,15 +1,24 @@
-"use client"
-import { useState, useEffect } from 'react';
-import Image from "next/image";
-import BlogNavigation from '../blogNavigation';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from "@/app/FirebaseConfig";
-import { useParams } from 'next/navigation';
+import Blog from '../blog';
 
+interface BlogItem {
+    id: string;
+    title: string;
+    description: string// Add any other properties you expect in your blog items
+  }
+
+  type Props = {
+    params: {
+        blogId: string
+    }
+}
 
 async function fetchDataFirestore(blogId: string) {
+   
     const docRef = doc(db, "blog",  blogId);
     const docSnap = await getDoc(docRef);
+
     if (docSnap.exists()) {
         return docSnap.data();
     } else {
@@ -17,40 +26,27 @@ async function fetchDataFirestore(blogId: string) {
     }
 }
 
+export async function generateStaticParams() {
+    const listCollection = collection(db, "blog");
+  const querySnapshot = await getDocs(query(listCollection, orderBy("title", "desc")));
+  const list: BlogItem[] = [];
 
-export default function Blogs() {
-    const blogId = useParams();
+  querySnapshot.forEach((doc) => {
+    const newList = doc.data();
+    list.push({ id: doc.id, ...newList } as BlogItem);
+  });
+   
+    return list.map((post: any) => ({
+      blogId: post.id,
+    }))
+}
+
+export default function Blogs({ params: { blogId }}: Props) {
+
+    const blog = fetchDataFirestore(blogId);
     
-    const [blog, setBlog] = useState<any>(null);
-
-    console.log("Im from params " + blogId)
-    const fetchBlog = async () => {
-        return await fetchDataFirestore(String(blogId.blogId));
-    }
-
-    useEffect(() => {
-       fetchBlog().then(setBlog);
-    }, []);
-
     return (
-        <>
-            {blog && (
-                <div className='p-4 flex flex-col gap-6 md:gap-12 md:flex-row md:p-20'>
-                    <div className='w-full md:w-2/3'>
-                        <h2 className='text-3xl lg:text-6xl font-semibold text-slate-800 mb-6'>{blog.title}</h2>
-                        <p className='text-lg text-slate-600 mb-6'>Ažurirano: Januar 2024</p>
-                        <p className='text-black-900 font-semibold text-2xl mb-10'>Autor: <span className='text-slate-500'>Ime i Prezime</span></p>
-                        <p>{blog.description}</p>
-                    </div>
-                    <div className='w-full md:w-1/3'>
-                        <div className='w-1/2'>
-                            <Image src={`${blog.imageURL}`} className='w-full' width={800} height={800} alt="blog image"/>
-                        </div>
-                        <BlogNavigation blogId={blogId.blogId} blog={blog} setBlog={setBlog}/>
-                    </div>
-                </div>
-            )}
-        </>
-    );
+        <Blog blogData={blog} id={blogId}/>
+    )
     
 }
