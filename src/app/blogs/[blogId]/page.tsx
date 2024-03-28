@@ -8,7 +8,7 @@ interface BlogItem {
     description: string// Add any other properties you expect in your blog items
   }
 
-  type Props = {
+type Props = {
     params: {
         blogId: string
     }

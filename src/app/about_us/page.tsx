@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function AboutUs() {
+
   return (
     <div className="w-[80%] md:w-1/2 mx-auto my-20">
         <h1 className='text-6xl text-slate-800 font-semibold text-center mb-20'>O nama</h1>

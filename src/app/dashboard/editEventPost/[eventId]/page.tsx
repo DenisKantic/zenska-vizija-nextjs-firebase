@@ -1,214 +1,33 @@
-"use client"
-import React,{ChangeEvent, useState, useEffect} from 'react';
-import MyRichTextEditor from '../TextEditor';
-import { updateDoc, doc, getDoc, } from 'firebase/firestore';
+import { getDoc, getDocs, collection,query, orderBy, } from 'firebase/firestore';
 import { db } from '@/app/FirebaseConfig';
-import {storage} from '@/app/FirebaseConfig'
-import {ref, uploadBytes, getDownloadURL} from "firebase/storage"
-import { TbCameraPlus } from "react-icons/tb";
-import { useParams } from 'next/navigation';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation'
-import { FaArrowAltCircleLeft } from "react-icons/fa";
-import Link from 'next/link';
+import EventPost from '../eventPost';
 
 
-const EditBlogPost = () => {
-  const router = useRouter();
-  const params = useParams();
-  const [title,setTitle] = useState("");
-  const [option, setOption] = useState("blog");
-  const [text, setText] = useState("");
-  const [date, setDate] = useState("");
-  const [image,setImage] = useState<File | null>(null);
-  const [location, setLocation] = useState("");
-  const [formattedDate, setFormattedDate] = useState('');
-  const [error, setError] = useState(false);
-  const [time,setTime] = useState("")
-  const [imageURL, setImageURL] = useState("");
-
-  const formatDate = (e:any) => {
-    const rawDateValue = e.target.value;
-    const parsedDate = new Date(rawDateValue);
-    const formattedDate = `${String(parsedDate.getDate()).padStart(2, '0')}/${String(parsedDate.getMonth() + 1).padStart(2, '0')}/${parsedDate.getFullYear().toString().slice(-2)}`;
-    setFormattedDate(formattedDate);
-  };
-
-  const updateParentState =(newValue: any) =>{
-    setText(newValue);
-  }
-
-
-  const uploadImage = (e: ChangeEvent<HTMLInputElement>) =>{
-    if(e.target.files && e.target.files[0]){
-      setImage(e.target.files[0])
-    } else {
-      console.log("error upload image")
-    }
-  }
-
-
-  const handleUploadImage = async ()=>{
-      try{
-      if(image){
-      const storageRef = ref(storage, `images/${image.name}`)
-      await uploadBytes(storageRef, image);
-      console.log(`Upload is done`);
-      const downloadURL = await getDownloadURL(storageRef)
-      setImageURL(downloadURL)
-      const submit = await editPostData(title, text, option,formattedDate, location, time, downloadURL);
-      console.log("sucessfully created new data");
-        } else {
-          const submit = await editPostData(title, text, option,formattedDate, location, time, imageURL);
-        }
-      } catch (error){
-        console.log("error in handleUploadImage", error)
-      }
-    }
-
-
-
-  const handleSubmit = async (e: any) =>{
-    e.preventDefault();
-    try{
-      const imageUpload = await handleUploadImage();
-      console.log("sucess in handleSubmit");
-   } catch(error){
-    console.log("ERROR in handleSubmit", error);
+type Props = {
+  params: {
+      eventId: string
   }
 }
 
-
-const editPostData = async (title: any, description: any, option: any, date: any, time: any, location: any, imageUrl: string) => {
-  const docRef = doc(db, "event", String(params.eventId));
-
-  try {
-    const docUpdate = await updateDoc(docRef, {
-      title: title,
-      description: description,
-      type: option,
-      date: date,
-      time: time,
-      location: location,
-      imageURL: imageUrl
-    });
-
-    console.log('Success updating blog data', docUpdate); // Log docUpdate here
-    router.push('/dashboard/event');
-  } catch (error) {
-    console.error("Error updating blog data: ", error);
-  }
-  
-}
-
-
-useEffect(()=> {
-  const getBlogData = async () => {
-    try {
-      const docRef = doc(db, "event",  String(params.eventId)); // Assuming params.blogId holds the ID of the blog post
-      const docSnap = await getDoc(docRef);
-    
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        setText(data.description);
-        setImageURL(data.imageURL);
-        setTitle(data.title);
-        setOption(data.type);
-        setLocation(data.location)
-        setTime(data.time)
-      } else {
-        console.log("No such document exists!");
-      }
-    } catch (error) {
-      console.error("Error fetching blog data:", error);
-    }
-  };
-
-  getBlogData();
-},[])
-
-  return (
-    <div className='w-full h-screen overflow-y-scroll p-10'>
-            <Link href="/dashboard/event" className='cursor-pointer text-4xl'>
-                <FaArrowAltCircleLeft className='text-[#F93EDF]' />
-            </Link>
-      <h1 className='text-4xl'>Uredite događaj</h1>
-
-      <form onSubmit={handleSubmit}  className='flex flex-col justify-start items-start mt-10 min-h-screen'>
-
-        <p className='text-xl'>Promijenite naslovnu sliku</p>
-        <div className='w-32'> 
-          <Image className='w-full' src={imageURL} width={800} height={800} alt="image upload"/>
-        </div>
-        <label className='mt-5 w-[50%] cursor-pointer rounded-full bg-white text-[#C86DD7] border-[2px] border-[#F93EDF]
-          xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3'>
-         {image==null ? (<TbCameraPlus className='mx-auto' />) : image.name}
-        <input 
-        type="file" 
-        accept='image/png, image/jpg, image/jpeg' 
-        onChange={(e:any)=> uploadImage(e)}
-        className='hidden'
-        />
-        </label>
-        <p className={error ? "block font-bold text-lg text-red-500" : "hidden"}>**Morate unijeti sliku</p>
-          
-        <p className='text-xl mt-5'>Naslov objave</p>
-        <input 
-        type="text" 
-        required 
-        placeholder='Unesite Vaš naslov' 
-        value={title}
-        className='w-[50%] mt-5 text-[#C86DD7] text-xl rounded-full outline-none
-        hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
-        xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3'
-        onChange={(e)=>setTitle(e.target.value)}
-        />
-        <br />
-            <div className='w-full'>
-              <p className='text-xl'>Uredite datum</p>
-              <input type="date" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
-              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
-              onChange={formatDate}/>
-            </div>
-            <div className='w-full'>
-              <p className='text-xl'>Mjesto odvijanja događaja</p>
-              <input 
-              type="text"
-              placeholder='Upišite ovdje'
-              className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
-              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
-              value={location}
-              onChange={(e)=>setLocation(e.target.value)}/>
-            </div>
-
-            <div className='w-full'>
-              <p className='text-xl'>Vrijeme održavanja</p>
-              <input type="text" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
-              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
-              value={time}
-              onChange={(e)=>setTime(e.target.value)}/>
-            </div>
-
-        <p className='text-xl mb-5 mt-5'>Tekst objave</p>
-        
-      <MyRichTextEditor onTextChange={updateParentState} description={text}/>
+export async function generateStaticParams() {
+  const listCollection = collection(db, "event");
+  const querySnapshot = await getDocs(query(listCollection, orderBy("title", "desc")))
+  const list:any = [];
+      
+  querySnapshot.forEach((doc)=>{
+    const newList = doc.data();
+    list.push({id: doc.id, ...newList})
+  })
  
-    {/* za testiranje teksta nakon upisivanja u editor<p
-      dangerouslySetInnerHTML={{__html: text }} 
-      className='w-[50%] min-h-[50vh] text-lg'>
-      </p>
-  */}
+  return list.map((post: any) => ({
+    eventId: post.id,
+  }))
+}
 
-          <button className='px-8 bg-[#F93EDF] mt-5 text-white border-[2px] border-[#F93EDF] rounded-full py-1
-                       hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
-                       xxs:text-sm sm:text-lg'
-                       type='submit'
-                       >
-                        Izmjeni objavu
-              </button>
-
-      </form>
-      </div>
+const EditBlogPost = ({ params: { eventId }}: Props) => {
+  
+  return (
+   <EventPost id={eventId}/>
      
   )
 }

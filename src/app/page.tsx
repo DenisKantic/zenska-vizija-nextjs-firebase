@@ -18,7 +18,9 @@ const Page = () => {
   return (
     <div>
       {isLoading ? (<Spinner />) : 
-      ( <Home />)
+      (
+      <Home />
+      )
       }
     </div>
   )
