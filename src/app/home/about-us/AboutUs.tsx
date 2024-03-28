@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 const AboutUs = () => {
   return (
-    <section>
+    <section id="aboutUs">
       <div className="mx-auto flex px-16 pt-12 py-4 mb-8 pb-4 md:flex-row flex-col items-center mt-4">
         <div className="flex md:w-1/2 w-full mb-10 md:mb-0 h-full">
           <div className="w-full h-full flex flex-col">
