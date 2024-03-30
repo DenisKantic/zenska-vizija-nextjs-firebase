@@ -1,9 +1,29 @@
-import Image from "next/image";
+"use client"
+import React,{useEffect, useState} from 'react'
+import Home from './home/Home'
+import Spinner from './Spinner'
 
-export default function Home() {
+const Page = () => {
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1200); // Display spinner for 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div>
-      <h1>Test</h1>
+      {isLoading ? (<Spinner />) : 
+      (
+      <Home />
+      )
+      }
     </div>
-  );
+  )
 }
+
+export default Page
