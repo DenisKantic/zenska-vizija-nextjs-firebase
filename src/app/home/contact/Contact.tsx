@@ -14,7 +14,7 @@ const Contact = () => {
           Za bilo koje informacije, molimo vas da nam se obratite ili putem
           društvenih mreža ili putem email-a.
         </p>
-        <div className="flex space-x-4 mb-8 mt-4 mr-5">
+        <div className="flex w-full lg:w-2/3 flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4 mb-8 mt-4 mr-5">
           <button
             className="bg-purplePizzazz text-white hover:bg-grayy text-[16px] flex-grow py-3 px-4 
             rounded-[16px] flex justify-center items-center space-x-2"
