@@ -10,7 +10,7 @@ import BlogCard from "./BlogCard";
 const Blog = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [blogs, setBlogs] = useState([]);
- 
+
   // get blogs from firestore
   const getBlogs = () => {
     const blogsCollectionRef = collection(db, "blog");
@@ -53,17 +53,25 @@ const Blog = () => {
     <div id="blog" className="py-8">
       <div
         className="flex items-center justify-center font-bold text-5xl 
-      pt-10 pb-4 px-6 mb-4 mt-10 text-chineseBlack"
+      lg:pt-10 pb-4 px-6 mb-4 lg:mt-10 sm:mt-10 text-chineseBlack"
       >
-        <h1>Blog</h1>
+        <p className="lg:text-5xl sm:text-[26px] xs:text-[22px] opacity-80">
+          Blog
+        </p>
       </div>
       {/* Arrows */}
-      <div className="flex mt-4 justify-end items-center mr-4 mb-4 py-6 px-5">
-        <span className="text-chineseBlack mr-4 pr-4">Vidi druge programe</span>
-        <div className="flex space-x-2 mr-8">
-          <div className="px-2">
+      <div
+        className="flex mt-7 justify-end items-center xs:justify-center sm:justify-end lg:mr-4 lg:mb-4 lg:py-6 
+        lg:px-5 sm:pl-4 sm:py-3 xs:py-4 xs:ml-7"
+      >
+        <span className="text-chineseBlack lg:text-xl sm:text-[16px] lg:pt-2 lg:pr-4 md:pr-1 md:mb-2 xs:pb-2 xs:px-2">
+          Vidi druge objave
+        </span>
+        <div className="flex lg:space-x-2 lg:mr-8 sm:ml-3 sm:mt-1 xs:px-4 xs:pb-1 md:pb-3 xs:space-x-2">
+          <div className="lg:px-2 xs:pr-2">
             <Image
-              className="hover:text-purplePizzazz h-full w-full"
+              className="hover:text-purplePizzazz lg:h-full lg:w-full md:h-[80%] md:w-[80%] 
+              sm:h-[80%] sm:w-[80%] xs:h-[80%] xs:w-[90%] cursor-pointer"
               src="/images/landing/grayArrow.png"
               alt="grayArrow"
               width={100}
@@ -71,9 +79,10 @@ const Blog = () => {
               onClick={handlePrevBlogs}
             />
           </div>
-          <div className="px-1">
+          <div className="lg:px-3">
             <Image
-              className=" hover:text-grayy h-full w-full"
+              className=" hover:text-grayy lg:h-full lg:w-full md:h-[80%] md:w-[80%] 
+              sm:h-[80%] sm:w-[80%] xs:h-[80%] xs:w-[90%] cursor-pointer"
               src="/images/landing/pinkArrow.png"
               alt="pinkArrow"
               width={100}

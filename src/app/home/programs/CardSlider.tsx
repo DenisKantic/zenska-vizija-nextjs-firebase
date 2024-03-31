@@ -23,12 +23,21 @@ const CardSlider = () => {
 
   return (
     <div className="flex flex-col">
-      <div className="flex mt-4 justify-end items-center mr-4 mb-4 py-6 px-5">
-        <span className="text-chineseBlack mr-4 pr-4">Vidi druge programe</span>
-        <div className="flex space-x-2 mr-8">
-          <div className="px-2">
+      <div
+        className="flex mt-4 lg:justify-end sm:justify-end lg:items-center xs:justify-center lg:mr-4 lg:mb-4 lg:py-6 lg:px-5 
+      md:py-3 sm:pl-4 sm:py-3 xs:py-4 xs:ml-7"
+      >
+        <span
+          className="text-chineseBlack lg:pt-3 lg:mr-2 lg:pr-2 md:pr-2 md:mb-2 
+        lg:text-xl sm:text-[14px] xs:text-[12px] xs:pb-2 xs:px-2"
+        >
+          Vidi druge programe
+        </span>
+        <div className="flex lg:space-x-2 lg:mr-8 sm:ml-2 sm:pt-0 xs:px-4 xs:pb-2">
+          <div className="lg:px-2 xs:pr-2">
             <Image
-              className="hover:text-purplePizzazz h-full w-full"
+              className="hover:text-purplePizzazz lg:h-full lg:w-full md:h-[80%] md:w-[80%] 
+              sm:h-[80%] sm:w-[100%] xs:h-[80%] xs:w-[90%] cursor-pointer"
               src="/images/landing/grayArrow.png"
               alt="grayArrow"
               onClick={goToPrevSet}
@@ -36,9 +45,10 @@ const CardSlider = () => {
               height={100}
             />
           </div>
-          <div className="px-3">
+          <div className="lg:px-3 xs:pl-2">
             <Image
-              className=" hover:text-grayy h-full w-full"
+              className=" hover:text-grayy lg:h-full lg:w-full md:h-[80%] md:w-[80%] 
+              sm:h-[80%] sm:w-[100%] xs:h-[80%] xs:w-[90%] cursor-pointer"
               src="/images/landing/pinkArrow.png"
               alt="pinkArrow"
               onClick={goToNextSet}
@@ -49,32 +59,37 @@ const CardSlider = () => {
         </div>
       </div>
 
-      <div className="p-4 flex flex-row space-x-12 justify-center">
+      <div
+        className="lg:p-4 sm:mt-3 sm:gap-2 sm:px-10 xs:gap-2 xs:px-6 flex sm:flex-col md:flex-row lg:flex-row 
+        xs:flex-col lg:space-x-12 xs:space-y-2 justify-center xs:mt-2"
+      >
         {dummyData.slice(startIndex, startIndex + 3).map((card, index) => (
           <div
             key={index}
-            className=" bg-white shadow-lg rounded-xl flex flex-col items-center justify-center px-4"
+            className=" bg-white shadow-lg rounded-xl flex flex-col items-center justify-center sm:px-1 lg:px-4"
           >
-            <div className="flex justify-center items-center">
-              <h2 className="text-2xl font-bold opacity-60 py-6">
+            <div className="flex justify-center items-center sm:px-2 xs:px-3">
+              <h2 className="lg:text-2xl sm:text-[20px] xs:text-[16px] font-bold opacity-60 lg:py-6 sm:py-6 xs:py-4">
                 {card.title}
               </h2>
             </div>
             <div className="flex-1 mb-2">
-              <Image
-                src={card.backgroundImage}
-                alt={card.title}
-                width={344}
-                height={376}
-                className="py-1 px-2 rounded-[16px]"
-              />
-              <div className="flex py-4 px-2">
+              <div className="flex justify-center items-center">
+                <Image
+                  src={card.backgroundImage}
+                  alt={card.title}
+                  width={354}
+                  height={376}
+                  className="py-1 lg:px-2 rounded-[16px] lg:w-[100%] sm:w-[85%] lg:h-[80%] xs:w-[80%] xs:h-[70%] "
+                />
+              </div>
+              <div className="flex xs:px-7 py-4 lg:px-2">
                 <button
-                  className=" w-full px-4 py-2 bg-purplePizzazz text-white rounded-[16px]
-                  hover:text-purplePizzazz hover:bg-chineseBlackLight 
-                  hover:bg-opacity-10"
+                  className=" w-full lg:px-4 lg:py-2 bg-purplePizzazz text-white lg:text-xl sm:text-[12px]
+                  rounded-[16px] hover:text-purplePizzazz hover:bg-chineseBlackLight 
+                  hover:bg-opacity-10 xs:text-[10px] xs:py-2"
                 >
-                  Saznaj Više
+                  <p>Saznaj Više</p>
                 </button>
               </div>
             </div>

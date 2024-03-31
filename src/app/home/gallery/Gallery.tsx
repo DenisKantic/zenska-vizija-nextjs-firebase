@@ -7,8 +7,11 @@ const Gallery = () => {
   return (
     <>
       <div id="gallery" className="bg-crayola flex flex-col items-center">
-        <div className="py-8 mt-6">
-          <h3 className="text-center font-bold text-lotion text-5xl xl:text-6xl mt-8">
+        <div className="lg:py-8 lg:mt-6">
+          <h3
+            className="text-center font-bold text-lotion lg:text-5xl sm:text-[30px] md:text-[34px] xs:text-[26px] 
+          mt-8"
+          >
             Galerija
           </h3>
         </div>
@@ -21,7 +24,7 @@ const Gallery = () => {
                 width={200}
                 height={200}
                 className="rounded-[12px] shadow-xl shadow-chineseBlack w-full h-full
-              cursor-pointer transition ease-in-out duration-300 hover:scale-75 hover:translate-y-1"
+              cursor-pointer transition ease-in-out duration-300 lg:hover:scale-75 hover:translate-y-1"
               />
             </div>
           ))}

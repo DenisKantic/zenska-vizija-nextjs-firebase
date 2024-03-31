@@ -7,12 +7,12 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    screens:{
-      'xxs': '200px',
-      'xs': '400px',
-      'sm': '600px',
-      'md': '800px',
-      'lg': '1000px'
+    screens: {
+      xxs: "200px",
+      xs: "400px",
+      sm: "600px",
+      md: "800px",
+      lg: "1000px",
     },
     extend: {
       backdropBlur: {
@@ -23,7 +23,7 @@ const config: Config = {
         purplePizzazz: "#f93edf", // pink
         platinum: "#E7E7E7", // light-gray
         magnolia: "#FEF1FD",
-        crayola: "#97427B",
+        crayola: "#97427B", // dark purple
         chineseBlack: "#141414", // dark-gray
         chineseBlackLight: "#121212",
         grayy: "#808080",

@@ -3,7 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
 interface BlogCardProps {
-  blogId: number,
+  blogId: number;
   imageUrl: string | StaticImageData;
   title: string;
   description: string;
@@ -17,8 +17,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   description,
   date,
 }) => {
-
-  console.log("Im from card " + blogId)
+  console.log("Im from card " + blogId);
   return (
     <div
       className="mx-auto overflow-hidden bg-white rounded-[16px] shadow-lg 
@@ -39,20 +38,22 @@ const BlogCard: React.FC<BlogCardProps> = ({
         >
           <div className="flex w-full justify-between">
             <div className="flex items-start flex-col">
-              <span className="text-2xl font-medium text-lotion pt-1 px-1">
+              <span className="lg:text-2xl font-medium text-lotion pt-1 px-1">
                 {title}
               </span>
-              <span className="text-[12px] text-lotion opacity-50 px-1 pb-0.5">
+              <span className="lg:text-[12px] text-lotion opacity-50 px-1 pb-0.5">
                 {date}
               </span>
-              <span className="text-white text-[14px] pl-1">{description}</span>
+              <span className="text-white lg:text-[14px] pl-1">
+                {description}
+              </span>
             </div>
 
             <div className="flex items-end">
               <Link href={`/blogs/${blogId}`}>
-              <button className="hover:text-white text-purplePizzazz font-bold py-2 px-2 rounded focus:outline-none">
-                Pročitaj
-              </button>
+                <button className="hover:text-white text-purplePizzazz font-bold py-2 px-2 rounded focus:outline-none">
+                  Pročitaj
+                </button>
               </Link>
             </div>
           </div>

@@ -13,27 +13,37 @@ const HeroSection = () => {
   };
 
   return (
-    <section>
-      <div className="flex md:flex-row flex-col pb-12 h-[100%]">
+    <>
+      <div
+        className="flex md:flex-row lg:flex-row sm:flex-row xs:flex-col-reverse xxs:flex-col-reverse 
+      lg:pb-12 h-full"
+      >
         <div
-          className="p-4 bg-crayola flex-wrap w-full md:w-1/2 lg:pr-24 md:pl-16 flex flex-col md:items-start 
-          md:text-left text-center items-center justify-center"
+          className="lg:pl-6 bg-crayola flex-wrap w-full md:w-1/2 md:px-4 md:py-4 flex flex-col md:items-start 
+          md:text-left md:pt-8 text-center items-center justify-center"
         >
-          <div className="leading-5 pt-8">
-            <h1 className="sm:text-4xl text-5xl mb-4 font-bold text-white">
+          <div className="lg:pt-8 md:pt-9 sm:pt-9 sm:mt-5">
+            <h1
+              className="md:text-2xl md:mb-1 lg:text-[34px] sm:text-[15px] lg:mb-2 lg:font-bold md:font-semibold
+             text-white xs:py-1 lg:pt-4 lg:py-2 lg:px-7 lg:leading-10 xxs:text-[15px]"
+            >
               U ZNAK SOLIDARNOSTI ZA NAŠA PRAVA
             </h1>
-            <p className="text-white mb-8 text-[20px]">
+            <p
+              className="text-white lg:mb-3 lg:text-[20px] md:text-[14px] md:mb-2 
+            xs:text-[10px] xs:pb-1 sm:px-2 md:px-0 xxs:text-[9px] lg:px-7"
+            >
               Posvećeni smo borbi za pravednost, jednakost i autonomiju svih
               žena.
             </p>
           </div>
-          <div className="flex my-4 md:mb-0">
+          <div className="flex lg:my-2 lg:ml-6 md:mb-0 md:mt-2 sm:mt-1 xs:my-2 xxs:mt-4">
             <button
               onClick={() => scrollTo()}
               className="inline-flex items-center justify-center text-white  bg-purplePizzazz
-                  border-0 py-2 px-6 focus:outline-none hover:text-purplePizzazz hover:bg-brightGray 
-                   rounded-[16px] text-[14px] lg:w-169 lg:h-43 sm:w-48 sm:h-12"
+                  border-0 lg:py-2 sm:px-2 sm:mt-2 xs:px-2 xs:py-2 focus:outline-none hover:text-purplePizzazz hover:bg-brightGray 
+                   rounded-[16px] lg:text-[16px] md:text-[13px] sm:text-[10px] xs:text-[10px] lg:w-[180px] lg:h-[53px] md:w-[135px] 
+                   md:h-[32px] sm:w-[90px] sm:h-[30px] xs:w-[85px] xs:h-[30px] xxs:text-[8px] xxs:py-1 xxs:px-2"
             >
               Kontakiraj nas
             </button>
@@ -49,7 +59,7 @@ const HeroSection = () => {
           />
         </div>
       </div>
-    </section>
+    </>
   );
 };
 
