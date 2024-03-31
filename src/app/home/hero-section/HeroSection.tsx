@@ -13,14 +13,14 @@ const HeroSection = () => {
   };
 
   return (
-    <section>
+    <section className="">
       <div className="flex md:flex-row flex-col pb-12 h-[100%]">
         <div
-          className="p-4 bg-crayola flex-wrap w-full md:w-1/2 lg:pr-24 md:pl-16 flex flex-col md:items-start 
+          className="px-4 pb-14 pt-32 bg-crayola flex-wrap w-full md:w-1/2 md:px-10 lg:px-16 flex flex-col md:items-start 
           md:text-left text-center items-center justify-center"
         >
-          <div className="leading-5 pt-8">
-            <h1 className="sm:text-4xl text-5xl mb-4 font-bold text-white">
+          <div className="leading-8 pt-8 ">
+            <h1 className="text-4xl md:text-5xl mb-4 font-bold text-white">
               U ZNAK SOLIDARNOSTI ZA NAŠA PRAVA
             </h1>
             <p className="text-white mb-8 text-[20px]">

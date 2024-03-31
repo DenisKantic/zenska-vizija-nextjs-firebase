@@ -11,22 +11,23 @@ const Footer = () => {
   return (
     <>
       <div
-        className="container bg-lotion pl-10 py-12 mx-auto flex md:items-center 
-			md:flex-row md:flex-nowrap flex-wrap flex-col rounded-[16px]"
+        className="md:w-[93%] bg-lotion px-10 py-12 sm:mx-auto flex justify-between
+		 md:flex-nowrap flex-wrap flex-col  rounded-[16px]"
       >
-        <div className="w-64 pl-10 flex-shrink-0 md:mx-0 md:text-left">
-          <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-            <Image
-              src="/images/landing/company_logo.png"
-              alt="company-logo"
-              width={100}
-              height={100}
-            />
-          </a>
-        </div>
+        <div className="flex flex-col lg:flex-row items-center justify-center">
+          <div className=" flex-shrink-0 lg:mr-40 lg:ml-20">
+            <a className="flex title-font font-medium items-center justify-center text-gray-900">
+              <Image
+                src="/images/landing/company_logo.png"
+                alt="company-logo"
+                width={120}
+                height={120}
+              />
+            </a>
+          </div>
 
-        <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 gap-5">
-          <div className="lg:w-1/4 md:w-1/2 w-full px-2">
+        <div className="flex-grow flex flex-wrap gap-5 justify-between">
+          <div className="lg:w-1/4 md:w-1/2 w-full">
             <h2 className="font-medium text-chineseBlackLight text-[16px] mb-3">
               Linkovi
             </h2>
@@ -60,7 +61,7 @@ const Footer = () => {
               </li>
             </nav>
           </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full md:pl-4 ml-2">
+          <div className="lg:w-1/4 md:w-1/2 w-full ">
             <div className="flex flex-col items-start cursor-pointer gap-2">
               <h2 className="font-medium text-chineseBlackLight text-[16px] mb-4">
                 Podrška
@@ -76,7 +77,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full md:pl-4 ml-2">
+          <div className="lg:w-1/4 md:w-1/2 w-full">
             <h2 className="font-medium text-chineseBlackLight text-[16px] mb-4">
               Kontakt
             </h2>
@@ -117,12 +118,14 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="ml-12 my-2 pl-8">
-            <p className="text-chineseBlackLight opacity-80 text-[12px] sm:text-left">
+          
+        </div>
+        </div>
+        <div className="my-12">
+            <p className="text-chineseBlackLight text-center opacity-80 text-[12px]">
               © Ženska Vizija 2024. Sva prava zadržava.
             </p>
           </div>
-        </div>
       </div>
     </>
   );

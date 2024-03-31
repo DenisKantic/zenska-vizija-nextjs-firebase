@@ -3,15 +3,15 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-
-const Navbar = () => {
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+const Navbar = ({showAside}: any) => {
   const router = useRouter();
   const scrollTo = (route: any) => {
     const element = document.getElementById(`${route}`);
     if (element) element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
   }
   return (
-    <div className="fixed z-50 w-[92%] py-3 shadow-xl bg-[#fff] mt-2 ml-14 rounded-[16px]">
+    <div className="fixed z-40 w-[92%] py-3 shadow-xl bg-[#fff] top-16 transform -translate-x-1/2 -translate-y-1/2 left-1/2 rounded-[16px]">
       <div className="flex justify-between items-center h-full w-full px-6 2xl:px-16">
         <div className="ml-4">
           <Link href="/home">
@@ -20,13 +20,19 @@ const Navbar = () => {
               alt="logo"
               width={110}
               height={110}
-              className="px-3 ml-4 mt-1 cursor-pointer"
+              className="md:px-3 md:ml-4 cursor-pointer"
               priority
             />
           </Link>
         </div>
         <div>
-          <ul className="hidden sm:flex mr-12 gap-4">
+        
+        <div className="md:hidden cursor-pointer" onClick={() => showAside()}>
+          <HiOutlineMenuAlt3 size={24} color="#97427B"/>
+        </div>
+        
+
+          <ul className="hidden md:flex mr-12 lg:gap-4 ">
             <li onClick={() => scrollTo('aboutUs')} className="cursor-pointer hover:bg-crayola hover:text-white rounded-[16px] px-5 py-3">
               <a className="text-[16px]">
                 O nama
