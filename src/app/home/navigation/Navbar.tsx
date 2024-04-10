@@ -14,7 +14,7 @@ const Navbar = ({showAside}: any) => {
     <div className="fixed z-40 w-[92%] py-3 shadow-xl bg-[#fff] top-16 transform -translate-x-1/2 -translate-y-1/2 left-1/2 rounded-[16px]">
       <div className="flex justify-between items-center h-full w-full px-6 2xl:px-16">
         <div className="ml-4">
-          <Link href="/home">
+          <Link href="/login">
             <Image
               src="/images/zenskaBG.png"
               alt="logo"
