@@ -14,7 +14,7 @@ const Navbar = () => {
     <div className="fixed z-50 w-[92%] py-3 shadow-xl bg-[#fff] mt-2 ml-14 rounded-[16px]">
       <div className="flex justify-between items-center h-full w-full px-6 2xl:px-16">
         <div className="ml-4">
-          <Link href="/home">
+          <Link href="/login">
             <Image
               src="/images/zenskaBG.png"
               alt="logo"

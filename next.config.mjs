@@ -5,7 +5,7 @@ const nextConfig = {
     unoptimized: true
   },
   trailingSlash: true,
-  output: "export"
+  useFileSystemPublicRoutes: false
 }
 
 export default nextConfig;
