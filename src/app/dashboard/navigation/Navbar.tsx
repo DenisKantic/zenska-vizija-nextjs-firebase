@@ -50,11 +50,12 @@ const Navbar = () => {
                     <p className={nav ? "hidden" : 'pl-10'}>Naslovna</p>
                 </Link>
 
-                <Link href='/dashboard/settings' 
+              <Link href='/dashboard' 
                 className='flex flex-row items-center justify-start text-xl cursor-pointer hover:text-red-400 pt-7'>
                     <FaRegUser /> 
-                    <p className={nav ? "hidden" : 'pl-10'}>Postavke profila</p>
+                    <p className={nav ? "hidden" : 'pl-10'}>Dashboard</p>
                 </Link>
+                  
 
                 <Link href="/dashboard/createPost" className='flex flex-row items-center justify-start pt-7 text-xl cursor-pointer hover:text-red-400'>
                     <IoCreate /> 
@@ -68,7 +69,7 @@ const Navbar = () => {
 
                 <Link href="/dashboard/event" className='flex flex-row items-center justify-start pt-7 text-xl cursor-pointer hover:text-red-400'>
                     <FaFileAlt /> 
-                    <p className={nav ? "hidden" : 'pl-10'}>Moji dogadjaji</p>
+                    <p className={nav ? "hidden" : 'pl-10'}>Moji događaji</p>
                 </Link>
 
                 <Link href="/login" onClick={()=> { logout(); router.push('/login')}} className='flex flex-row items-center pt-7 text-xl cursor-pointer hover:text-red-400'>

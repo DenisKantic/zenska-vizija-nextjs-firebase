@@ -17,7 +17,7 @@ const Login = () => {
     if (user) {
       router.push("/dashboard");
     } else {
-      router.push("login");
+      router.push("/login");
     }
   };
 

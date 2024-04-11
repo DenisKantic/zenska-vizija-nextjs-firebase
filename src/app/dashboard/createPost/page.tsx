@@ -28,6 +28,14 @@ const CreatePost = () => {
   const [formattedDate, setFormattedDate] = useState("");
   const [error, setError] = useState(false);
   const [time, setTime] = useState("");
+  const today = new Date();
+  const dateCreated = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}/${today.getFullYear().toString().slice(-2)}`;
+
+ // const dateCreated = today.toLocaleDateString();
+
+    {console.log("DATUM!!!!!!!!!!!!:",dateCreated)}
   
   const formatDate = (e: any) => {
     const rawDateValue = e.target.value;
@@ -68,7 +76,8 @@ const CreatePost = () => {
           formattedDate,
           location,
           time,
-          downloadURL
+          downloadURL,
+          dateCreated
         );
         console.log("sucessfully created new data");
       }
@@ -84,7 +93,8 @@ const CreatePost = () => {
     date: any,
     location: any,
     time: any,
-    imageURL: string
+    imageURL: string,
+    dateCreated: any
   ) {
     try {
       const docRef = await addDoc(collection(db, option), {
@@ -95,6 +105,7 @@ const CreatePost = () => {
         time: time,
         location: location,
         imageURL: imageURL,
+        dateCreated: dateCreated
       });
       console.log(option)
       console.log("document written with ID", docRef.id);
@@ -126,7 +137,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="w-full h-screen overflow-y-scroll p-10">
+    <div className="w-full h-full overflow-y-scroll 
+                    xxs:p-1 md:p-10">
       <h1 className="text-4xl">Kreiraj objavu</h1>
 
       <form
@@ -135,8 +147,8 @@ const CreatePost = () => {
       >
         <p className="text-xl">Ubacite naslovnu sliku</p>
         <label
-          className="mt-5 w-[50%] cursor-pointer rounded-full bg-white text-[#C86DD7] border-[2px] border-[#F93EDF]
-          xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3"
+          className="mt-5 cursor-pointer rounded-full bg-white text-[#C86DD7] border-[2px] border-[#F93EDF]
+          xxs:text-sm xxs:p-2 xxs:w-full sm:p-7 sm:text-xl sm:py-3 lg:w-[80%] xl:w-[50%]"
         >
           {image == null ? <TbCameraPlus className="mx-auto" /> : image.name}
           <input
@@ -158,9 +170,9 @@ const CreatePost = () => {
           type="text"
           required
           placeholder="Unesite Vaš naslov"
-          className="w-[50%] mt-5 text-[#C86DD7] text-xl rounded-full outline-none
+          className="mt-5 text-[#C86DD7] text-xl rounded-full outline-none
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
-        xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3"
+        xxs:text-sm xxs:p-2 xxs:w-full sm:p-7 sm:text-xl sm:py-3 lg:w-[80%] xl:w-[50%]"
           onChange={(e) => setTitle(e.target.value)}
         />
         <br />
@@ -179,7 +191,7 @@ const CreatePost = () => {
 
           <button
             type="button"
-            className="px-8 bg-[#F93EDF] ml-5 text-white  border-[2px] border-[#F93EDF] rounded-full py-1
+            className="px-8 bg-[#F93EDF] ml-3 text-white  border-[2px] border-[#F93EDF] rounded-full py-1
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
                        xxs:text-sm sm:text-lg"
             onClick={() => handleEventBtn()}
@@ -189,33 +201,36 @@ const CreatePost = () => {
         </div>
 
         <div className={event ? "w-full block" : "hidden"}>
-          <p className="text-xl">Izaberite datum dogadjaja</p>
+          <p className="xxs:text-lg md:text-xl">Izaberite datum događaja</p>
           <input
             type="date"
-            className="w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none cursor-pointer
-              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]"
+            className="py-3 mt-6 p-7 text-start rounded-full outline-none cursor-pointer
+              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
+              xxs:w-full xxs:text-lg md:text-xl lg:w-[80%] xl:w-[50%]"
             onChange={formatDate}
             required={event && true}
           />
         </div>
 
         <div className={event ? "w-full block" : "hidden"}>
-          <p className="text-xl">Mjesto odvijanja događaja</p>
+          <p className="xxs:text-lg md:text-xl pt-5">Mjesto odvijanja događaja</p>
           <input
             type="text"
             placeholder="Upišite ovdje"
-            className="w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
-              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]"
+            className="py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
+              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
+              xxs:w-full xxs:text-lg md:text-xl lg:w-[80%] xl:w-[50%]"
             onChange={(e) => setLocation(e.target.value)}
           />
         </div>
 
         <div className={event ? "w-full block" : "hidden"}>
-          <p className="text-xl">Vrijeme održavanja</p>
+          <p className="text-xl pt-5">Vrijeme održavanja</p>
           <input
             type="text"
-            className="w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
-              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]"
+            className="py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
+              over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
+              xxs:w-full xxs:text-lg md:text-xl lg:w-[80%] xl:w-[50%]"
             onChange={(e) => setTime(e.target.value)}
           />
         </div>
@@ -231,9 +246,9 @@ const CreatePost = () => {
   */}
 
         <button
-          className="px-8 bg-[#F93EDF] mt-5 text-white border-[2px] border-[#F93EDF] rounded-full py-1
+          className="bg-[#F93EDF] mt-5 text-white border-[2px] border-[#F93EDF] rounded-full py-1
                        hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
-                       xxs:text-sm sm:text-lg"
+                       xxs:text-sm xxs:w-full md:w-[200px] sm:text-lg"
           type="submit"
         >
           Kreiraj objavu

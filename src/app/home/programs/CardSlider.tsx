@@ -49,7 +49,7 @@ const CardSlider = () => {
         </div>
       </div>
 
-      <div className="p-4 flex flex-row space-x-12 justify-center">
+      <div className="py-4 flex flex-row space-x-12 justify-center overflow-hidden">
         {dummyData.slice(startIndex, startIndex + 3).map((card, index) => (
           <div
             key={index}
