@@ -13,7 +13,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="">
+    <section id="home">
       <div className="flex md:flex-row flex-col pb-12 h-[100%]">
         <div
           className="px-4 pb-14 pt-32 bg-crayola flex-wrap w-full md:w-1/2 md:px-10 lg:px-16 flex flex-col md:items-start 

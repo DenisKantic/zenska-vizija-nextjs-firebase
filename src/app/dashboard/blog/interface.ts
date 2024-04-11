@@ -3,7 +3,8 @@ interface Post {
     title: string,
     description: string,
     date: string,
-    imageURL: string
+    imageURL: string,
+    dateCreated: string
 }
 
 export default Post;

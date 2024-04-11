@@ -4,8 +4,7 @@ const nextConfig = {
     domains: ['firebasestorage.googleapis.com'],
     unoptimized: true
   },
-  trailingSlash: true,
-  useFileSystemPublicRoutes: false
+  trailingSlash: true
 }
 
 export default nextConfig;
