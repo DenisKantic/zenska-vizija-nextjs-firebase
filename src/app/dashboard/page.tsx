@@ -3,12 +3,12 @@ import Link from "next/link"
 const Dashboard = () => {
 
   return (
-    <div className='bg-[#FEF1FD] flex h-screen w-full overflow-y-scroll'>
-      <div className='flex-1 p-5 min-h-[50vh]'>
+    <div className='bg-[#FEF1FD] flex h-full w-full overflow-y-scroll'>
+      <div className='flex-1 p-5 h-full'>
         <h1 className='text-4xl'>Dobrodošli u svoj dashboard!</h1>
           <p className="text-xl py-10">Izaberite jednu od sljedećih opcija:</p>
-          <div className="w-[90%] min-h-[50vh] grid gap-10 pt-10 text-white font-bold tracking-wide text-3xl text-center
-                          xxs:grid-rows-2 md:grid-cols-2">
+          <div className="w-[90%]  grid gap-10 pt-10 text-white font-bold tracking-wide text-3xl text-center 
+                          xxs:grid-rows-2 xxs:h-auto md:grid-cols-2 md:h-[50vh]">
             
             <Link href="/" className="w-full p-5 h-[200px] bg-red-400 flex justify-center items-center rounded-xl
                                     hover:bg-red-200 hover:text-red-600">

@@ -76,7 +76,7 @@ const UserDataFetcher: React.FC = () => {
     <>
     {isLoading ? (<Spinner />) : 
     (<div className='grid justify-center mt-10 w-full h-full grid-flow-row auto-cols-max
-    xxs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-20'>
+    xxs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 md:gap-10'>
       {currentItems.map((data)=>(
         <div className='flex flex-col justify-around bg-red-100 mt-10' key={data.id}>
             <div className='h-full rounded-xl'>

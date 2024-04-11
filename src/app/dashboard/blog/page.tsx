@@ -17,7 +17,8 @@ const FetchData = () => {
 
 
   return (
-    <div className='w-full h-screen overflow-y-scroll p-10'>
+    <div className='w-full h-full overflow-y-scroll
+                    xxs:p-0 md:p-10'>
       <h1 className='text-4xl'>Moje objave</h1>
 
     <div className='w-full'>
