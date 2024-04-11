@@ -85,7 +85,7 @@ const UserDataFetcher: React.FC = () => {
                 className='w-full h-[230px] object-cover'
                 />
                 <div className='p-2 h-full'>
-                <h1 className='text-lg font-bold'>Naslov:<span className='font-normal ml-2'>{data.title}</span></h1>
+                <h1 className='text-lg font-bold'>Naslov:<span className='font-normal ml-2'>{data.title.substring(0,12)}...</span></h1>
                 <p className='text-md font-bold'>Datum: <span className='font-normal ml-2'>{data.date}</span></p>
                 <p className='text-md font-bold'>Mjesto: <span className='font-normal ml-2'>{data.location}</span></p>
                 <p className='text-md font-bold'>Vrijeme: <span className='font-normal ml-2'>{data.time}</span></p>

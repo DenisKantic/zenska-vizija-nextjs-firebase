@@ -35,7 +35,7 @@ export default function Blog({id, blogData}:any) {
                         <h2 className='text-3xl lg:text-6xl font-semibold text-slate-800 mb-6'>{blog.title}</h2>
                         <p className='text-lg text-slate-600 mb-6'>Ažurirano: Januar 2024</p>
                         <p className='text-black-900 font-semibold text-2xl mb-10'>Autor: <span className='text-slate-500'>Ime i Prezime</span></p>
-                        <p>{blog.description}
+                        <p dangerouslySetInnerHTML={{__html: blog.description }}>
                         </p>
                         
                     </div>

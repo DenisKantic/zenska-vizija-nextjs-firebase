@@ -33,15 +33,15 @@ const Navbar = ({showAside}: any) => {
         
 
           <ul className="hidden md:flex mr-12 lg:gap-4 ">
-            <li onClick={() => scrollTo('aboutUs')} className="cursor-pointer hover:bg-crayola hover:text-white rounded-[16px] px-5 py-3">
+            <li onClick={() => scrollTo('home')} className="cursor-pointer hover:bg-crayola hover:text-white rounded-[16px] px-5 py-3">
               <a className="text-[16px]">
-                O nama
+                Početna
               </a>
             </li>
 
-            <li onClick={() => scrollTo('programs')} className="cursor-pointer hover:bg-crayola hover:text-white rounded-[16px] px-5 py-3">
+            <li onClick={() => scrollTo('aboutUs')} className="cursor-pointer hover:bg-crayola hover:text-white rounded-[16px] px-5 py-3">
               <a className="text-[16px]">
-                Programi
+                O nama
               </a>
             </li>
 

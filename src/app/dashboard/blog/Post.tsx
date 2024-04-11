@@ -66,7 +66,7 @@ const UserDataFetcher: React.FC = () => {
   return (
     <>
     <div className='grid items-center justify-center mt-10 w-full h-full grid-flow-row auto-cols-max
-    xxs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-20'>
+    xxs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-10'>
         {currentItems.map((data)=>(
          
         <div className='flex flex-col justify-around bg-red-100 mt-10' key={data.id}>
@@ -76,7 +76,7 @@ const UserDataFetcher: React.FC = () => {
             className='w-full h-[230px] object-cover'
             />
             <div className='p-2 h-full overflow-hidden'>
-            <h1 className='text-lg font-bold'>Naslov:<span className='font-normal ml-2'>{data.title}</span></h1>
+            <h1 className='text-lg font-bold'>Naslov:<span className='font-normal ml-2'>{data.title.substring(0,12)}...</span></h1>
             <p className='text-md font-bold'>Tekst: <span className='font-normal ml-2' dangerouslySetInnerHTML={{__html: data.description }}>
             </span></p>
             </div>

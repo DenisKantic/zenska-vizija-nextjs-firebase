@@ -39,7 +39,7 @@ const EventCard: React.FC<EventCardProps> = ({
                   width={20}
                   height={20}
                 />
-                <span className="lg:text-[12px] xs:text-[10px] text-purplePizzazz">
+                <span className="lg:text-[12px] xs:text-[10px] text-purplePizzazz font-bold">
                   {location}
                 </span>
               </div>
@@ -48,28 +48,20 @@ const EventCard: React.FC<EventCardProps> = ({
               rounded-[16px] border-purplePizzazz px-3 py-2"
               >
                 <Image src={clockIcon} alt="clock" width={20} height={20} />
-                <span className="lg:text-[12px] xs:text-[10px] text-purplePizzazz">
+                <span className="lg:text-[12px] xs:text-[10px] text-purplePizzazz font-bold">
                   {time}
                 </span>
               </div>
             </div>
+
+            <p className="lg:text-[16px] xs:text-[14px] font-semibold text-purplePizzazz">
+                {title.substring(0,20)+"..."}
+              </p>
             <div className="py-2">
-              <p className="text-chineseBlack lg:text-[26px] xs:text-[20px] font-semibold">
-                {description}
+              <p className="text-chineseBlack lg:text-[26px] xs:text-[20px] font-semibold overflow-hidden" dangerouslySetInnerHTML={{__html: description }}>
               </p>
             </div>
-            <div className="flex items-center">
-              <Image
-                src={calendarIcon}
-                alt="calendar"
-                className="pr-2 h-auto w-auto"
-                width={20}
-                height={20}
-              />
-              <p className="lg:text-[16px] xs:text-[14px] font-semibold text-purplePizzazz">
-                {title}
-              </p>
-            </div>
+
             <div className="flex mt-2">
               <Image
                 src={imageURL}
