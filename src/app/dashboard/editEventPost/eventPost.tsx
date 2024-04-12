@@ -16,7 +16,6 @@ export default function EventPost({id}:any) {
     const [title,setTitle] = useState("");
     const [option, setOption] = useState("blog");
     const [text, setText] = useState("");
-    const [date, setDate] = useState("");
     const [image,setImage] = useState<File | null>(null);
     const [location, setLocation] = useState("");
     const [formattedDate, setFormattedDate] = useState('');
@@ -125,7 +124,8 @@ export default function EventPost({id}:any) {
   },[])
   
     return (
-      <div className='w-full h-screen overflow-y-scroll p-10'>
+      <div className='w-full h-screen overflow-y-scroll
+                      xxs:p-1 md:p-10'>
               <Link href="/dashboard/event" className='cursor-pointer text-4xl'>
                   <FaArrowAltCircleLeft className='text-[#F93EDF]' />
               </Link>
@@ -137,8 +137,8 @@ export default function EventPost({id}:any) {
           <div className='w-32'> 
             <Image className='w-full' src={imageURL} width={800} height={800} alt="image upload"/>
           </div>
-          <label className='mt-5 w-[50%] cursor-pointer rounded-full bg-white text-[#C86DD7] border-[2px] border-[#F93EDF]
-            xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3'>
+          <label className='mt-5 cursor-pointer rounded-full bg-white text-[#C86DD7] border-[2px] border-[#F93EDF]
+                     xxs:text-sm xxs:p-2 xxs:w-full sm:p-7 sm:text-xl sm:py-3 lg:w-[80%] xl:w-[50%]'>
            {image==null ? (<TbCameraPlus className='mx-auto' />) : image.name}
           <input 
           type="file" 
@@ -155,16 +155,17 @@ export default function EventPost({id}:any) {
           required 
           placeholder='Unesite Vaš naslov' 
           value={title}
-          className='w-[50%] mt-5 text-[#C86DD7] text-xl rounded-full outline-none
+          className='mt-5 text-[#C86DD7] text-xl rounded-full outline-none
           hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
-          xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3'
+          xxs:text-sm xxs:p-2 xxs:w-full sm:p-7 sm:text-xl sm:py-3 lg:w-[80%] xl:w-[50%]'
           onChange={(e)=>setTitle(e.target.value)}
           />
           <br />
               <div className='w-full'>
                 <p className='text-xl'>Uredite datum</p>
-                <input type="date" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
-                over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
+                <input type="date" className='py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
+                over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
+                xxs:w-full xxs:text-lg md:text-xl lg:w-[80%] xl:w-[50%]'
                 onChange={formatDate}/>
               </div>
               <div className='w-full'>
@@ -180,8 +181,9 @@ export default function EventPost({id}:any) {
   
               <div className='w-full'>
                 <p className='text-xl'>Vrijeme održavanja</p>
-                <input type="text" className='w-[50%] py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
-                over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]'
+                <input type="text" className='py-3 mt-6 p-7 text-start text-xl rounded-full outline-none
+                over:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
+                xxs:w-full xxs:text-lg md:text-xl lg:w-[80%] xl:w-[50%]'
                 value={time}
                 onChange={(e)=>setTime(e.target.value)}/>
               </div>
@@ -198,7 +200,7 @@ export default function EventPost({id}:any) {
   
             <button className='px-8 bg-[#F93EDF] mt-5 text-white border-[2px] border-[#F93EDF] rounded-full py-1
                          hover:bg-transparent hover:border-[#F93EDF] hover:font-bold hover:text-[#F93EDF]
-                         xxs:text-sm sm:text-lg'
+                         xs:text-sm xxs:w-full md:w-[200px] sm:text-lg'
                          type='submit'
                          >
                           Izmjeni objavu

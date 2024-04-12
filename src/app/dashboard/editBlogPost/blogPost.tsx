@@ -129,7 +129,8 @@ useEffect(()=> {
 },[])
 
   return (
-    <div className='w-full h-screen overflow-y-scroll p-10'>
+    <div className='w-full h-screen overflow-y-scroll
+    xxs:p-1 md:p-10'>
       <Link href="/dashboard/blog" className='cursor-pointer text-4xl'>
         <FaArrowAltCircleLeft className='text-[#F93EDF]' />
         </Link>
@@ -142,7 +143,7 @@ useEffect(()=> {
           <Image className='w-full' src={imageURL} width={800} height={800} alt="image upload"/>
         </div>
         <label className='mt-5 w-[50%] cursor-pointer rounded-full bg-white text-[#C86DD7] border-[2px] border-[#F93EDF]
-          xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3'>
+           xxs:text-sm xxs:p-2 xxs:w-full sm:p-7 sm:text-xl sm:py-3 lg:w-[80%] xl:w-[50%]'>
          {image==null ? (<TbCameraPlus className='mx-auto' />) : image.name}
         <input 
         type="file" 
@@ -161,7 +162,7 @@ useEffect(()=> {
         value={title}
         className='w-[50%] mt-5 text-[#C86DD7] text-xl rounded-full outline-none
         hover:outline-1 hover:outline-[#F93EDF] focus:outline-[#AC009B]
-        xxs:text-sm xxs:p-2 sm:p-7 sm:text-xl sm:py-3'
+        xxs:text-sm xxs:p-2 xxs:w-full sm:p-7 sm:text-xl sm:py-3 lg:w-[80%] xl:w-[50%]'
         onChange={(e)=>setTitle(e.target.value)}
         />
         <br />

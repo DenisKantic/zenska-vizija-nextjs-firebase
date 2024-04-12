@@ -22,7 +22,6 @@ const CreatePost = () => {
   const [option, setOption] = useState("blog");
   const [text, setText] = useState("");
   const [event, setEvent] = useState(false);
-  const [date, setDate] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [location, setLocation] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
