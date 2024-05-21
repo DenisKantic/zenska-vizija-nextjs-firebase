@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBfUc-nbbmdQGfgZgNWQMaRog1J9S9HK9s",
-  authDomain: "zenska-vizija.firebaseapp.com",
-  projectId: "zenska-vizija",
-  storageBucket: "zenska-vizija.appspot.com",
-  messagingSenderId: "184948142781",
-  appId: "1:184948142781:web:fa464606f9874b68677dd4",
-  measurementId: "G-FNJ09EF8NB"
+  apiKey: "AIzaSyAY2vkVWpSoJTXzW39dtnbquXvQPyffmLg",
+  authDomain: "zenskavizija-88ec6.firebaseapp.com",
+  projectId: "zenskavizija-88ec6",
+  storageBucket: "zenskavizija-88ec6.appspot.com",
+  messagingSenderId: "869760356643",
+  appId: "1:869760356643:web:88722cabb75e8444963c96",
+  measurementId: "G-R2K4F9KZ0E"
 };
 
 // Initialize Firebase

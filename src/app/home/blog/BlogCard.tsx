@@ -40,7 +40,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
           <div className="flex w-full justify-between">
             <div className="flex items-start flex-col">
               <span className="text-2xl font-medium text-lotion pt-1 px-1">
-                {title.substring(0,15)+"..."}
+              {title.substring(0,15)+"..."}
               </span>
               <span className="text-[12px] text-lotion opacity-50 px-1 pb-0.5">
                 {date}
